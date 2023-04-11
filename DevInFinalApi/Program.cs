@@ -1,11 +1,8 @@
-using Infrastructure.Service;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -16,7 +13,9 @@ var appSettings = new ConfigurationBuilder()
     .Build();
 
 Infrastructure.Service.DependencyResolverService.Register(builder.Services, appSettings);
-//Domain.Service.DependencyResolverService.Register(builder.Services);
+Domain.Service.DependencyResolverService.Register(builder.Services);
+
+builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 
 var app = builder.Build();
 
