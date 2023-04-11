@@ -8,13 +8,13 @@ namespace Infrastructure.Repository
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
-        public DbSet<CourseModel> Curso { get; set; }
-        public DbSet<UserModel> Usuario { get; set; }
+        public DbSet<CursoModel> Curso { get; set; }
+        public DbSet<UsuarioModel> Usuario { get; set; }
         public DbSet<CursoSalvoModel> CursoSalvo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CourseModel>()
+            modelBuilder.Entity<CursoModel>()
                 .Property(x => x.CategoriaCurso)
                 .HasConversion<string>()
                 .HasMaxLength(100);
@@ -34,8 +34,8 @@ namespace Infrastructure.Repository
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
-            modelBuilder.Entity<CourseModel>().HasData(CursoSeed.Seed);
-            modelBuilder.Entity<UserModel>().HasData(UsuarioSeed.Seed);
+            modelBuilder.Entity<CursoModel>().HasData(CursoSeed.Seed);
+            modelBuilder.Entity<UsuarioModel>().HasData(UsuarioSeed.Seed);
         }
     }
 }

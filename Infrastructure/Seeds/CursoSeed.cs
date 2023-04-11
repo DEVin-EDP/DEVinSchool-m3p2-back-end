@@ -5,9 +5,9 @@ namespace Infrastructure.Seeds
 {
     internal static class CursoSeed
     {
-        public static List<CourseModel> Seed { get; set; } = new List<CourseModel>()
+        public static List<CursoModel> Seed { get; set; } = new List<CursoModel>()
         {
-            new CourseModel
+            new CursoModel
             {
                 Id = 1,
                 Nome= "Curso de Java",
@@ -18,7 +18,7 @@ namespace Infrastructure.Seeds
                 CategoriaCurso = CategoriaEnum.TECNOLOGIA,
                 CursoAtivo = true
             },
-            new CourseModel
+            new CursoModel
             {
                 Id = 2,
                 Nome= "Adm de Empresas",
@@ -29,7 +29,7 @@ namespace Infrastructure.Seeds
                 CategoriaCurso = CategoriaEnum.ADMINISTRACAO,
                 CursoAtivo = true
             },
-            new CourseModel
+            new CursoModel
             {
                 Id = 3,
                 Nome= "Marketing de Redes Sociais",
@@ -40,7 +40,7 @@ namespace Infrastructure.Seeds
                 CategoriaCurso = CategoriaEnum.MARKETING,
                 CursoAtivo = true
             },
-            new CourseModel
+            new CursoModel
             {
                 Id = 4,
                 Nome= "Introdução ao Design Gráfico",

@@ -22,7 +22,7 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Models.CourseModel", b =>
+            modelBuilder.Entity("Domain.Models.CursoModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,31 +31,38 @@ namespace Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CargaHoraria")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("carga_horaria");
 
                     b.Property<string>("CategoriaCurso")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("categoria_curso");
 
                     b.Property<bool>("CursoAtivo")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("curso_ativo");
 
                     b.Property<string>("Informacao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("informacao");
 
                     b.Property<string>("Link")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("imagem_curso");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nome");
 
                     b.Property<string>("Resumo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("resumo");
 
                     b.HasKey("Id");
 
@@ -116,35 +123,34 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<string>("DataCursoSalvo")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("data_curso_salvo");
 
                     b.Property<string>("StatusCurso")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("status_curso");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("CursoId");
 
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("CursoSalvo");
                 });
 
-            modelBuilder.Entity("Domain.Models.UserModel", b =>
+            modelBuilder.Entity("Domain.Models.UsuarioModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -198,7 +204,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 11, 12, 6, 4, 859, DateTimeKind.Local).AddTicks(9483),
+                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7289),
                             Email = "teste@gmail.com",
                             Foto = "https://i.pinimg.com/236x/37/01/e7/3701e763f6ded4234b68d8fac1a9fa85.jpg",
                             Idade = 30,
@@ -210,7 +216,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 2,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 11, 12, 6, 4, 859, DateTimeKind.Local).AddTicks(9988),
+                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7823),
                             Email = "tiago@gmail.com",
                             Foto = "https://i.pinimg.com/236x/05/0b/72/050b721378546e519bd6e33c4ccf9630.jpg",
                             Idade = 22,
@@ -222,7 +228,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 3,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 11, 12, 6, 4, 859, DateTimeKind.Local).AddTicks(9990),
+                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7826),
                             Email = "josé@gmail.com",
                             Foto = "https://pbs.twimg.com/profile_images/1268204267749494788/az__pHAX_400x400.jpg",
                             Idade = 55,
@@ -234,7 +240,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 5,
                             CPF = "12345278412",
-                            DataCadastro = new DateTime(2023, 4, 11, 12, 6, 4, 859, DateTimeKind.Local).AddTicks(9992),
+                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7828),
                             Email = "ana@mail.com",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 32,
@@ -246,7 +252,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 6,
                             CPF = "78945612345",
-                            DataCadastro = new DateTime(2023, 4, 11, 12, 6, 4, 859, DateTimeKind.Local).AddTicks(9994),
+                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7830),
                             Email = "callas@mail.com",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 30,
@@ -258,7 +264,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 7,
                             CPF = "23456242189",
-                            DataCadastro = new DateTime(2023, 4, 11, 12, 6, 4, 859, DateTimeKind.Local).AddTicks(9999),
+                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7835),
                             Email = "rita@mail.com\"",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 82,
@@ -270,19 +276,19 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Models.CursoSalvoModel", b =>
                 {
-                    b.HasOne("Domain.Models.CourseModel", "Course")
+                    b.HasOne("Domain.Models.CursoModel", "Curso")
                         .WithMany()
-                        .HasForeignKey("CourseId")
+                        .HasForeignKey("CursoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.UserModel", "Usuario")
+                    b.HasOne("Domain.Models.UsuarioModel", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Course");
+                    b.Navigation("Curso");
 
                     b.Navigation("Usuario");
                 });
