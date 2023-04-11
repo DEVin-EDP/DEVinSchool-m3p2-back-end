@@ -10,7 +10,6 @@ namespace Infrastructure.Repository
 
         public DbSet<CourseModel> Curso { get; set; }
         public DbSet<UserModel> Usuario { get; set; }
-        public DbSet<CursoFavoritadoModel> CursoFavoritado { get; set; }
         public DbSet<CursoSalvoModel> CursoSalvo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,6 +22,13 @@ namespace Infrastructure.Repository
             modelBuilder.Entity<CursoSalvoModel>()
                 .Property(x => x.StatusCurso)
                 .HasConversion<string>()
+                .HasMaxLength(100);
+
+            modelBuilder.Entity<CursoSalvoModel>()
+                .Property(x => x.DataCursoSalvo)
+                .HasConversion(
+                    v => v.ToString("yyyy-MM-dd"),
+                    v => DateOnly.Parse(v))
                 .HasMaxLength(100);
 
             base.OnModelCreating(modelBuilder);
