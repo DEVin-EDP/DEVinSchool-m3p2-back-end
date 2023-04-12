@@ -17,7 +17,7 @@ namespace Infrastructure.Service
             _context = context; 
         }
 
-        public async Task<UsuarioModel> GetUsuarioByDto(UsuarioRequest dto)
+        public async Task<Usuario> GetUsuarioByDto(UsuarioRequest dto)
         {
             return await _context.Usuario.Include(i => i.DataCadastro)
                         .FirstOrDefaultAsync(f => f.Email == dto.Email && f.Senha == dto.Senha);
@@ -32,7 +32,7 @@ namespace Infrastructure.Service
 
             try
             {
-                List<UsuarioModel> usuario = await _context.Usuario.ToListAsync();
+                List<Usuario> usuario = await _context.Usuario.ToListAsync();
 
                 return usuario;
             }
@@ -76,7 +76,7 @@ namespace Infrastructure.Service
 
             try
             {
-                UsuarioModel usuario = await _context.Usuario.FindAsync(id);
+                Usuario usuario = await _context.Usuario.FindAsync(id);
 
                 if(usuario == null)
                 {
@@ -104,11 +104,19 @@ namespace Infrastructure.Service
             {
                 return new { Message = "Não foi possível retornar a informação." };
             }
+            if (_context.Usuario.Any(a => a.Email == request.Email))
+            {
+                return new { Message = "Email ja cadastrado em nosso sistema." };
+            }
+            if (_context.Usuario.Any(a => a.CPF == request.Cpf))
+            {
+                return new { Message = "CPF ja cadastrado em nosso sistema." };
+            }
 
             try
             {
                 IMapper mapper = ConfigurePostMapper();
-                UsuarioModel usuario = mapper.Map<UsuarioModel>(request);
+                Usuario usuario = mapper.Map<Usuario>(request);
 
                 _context.Usuario.Add(usuario);
                 await _context.SaveChangesAsync();
@@ -159,7 +167,7 @@ namespace Infrastructure.Service
 
         private static IMapper ConfigurePostMapper()
         {
-            var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<UsuarioRequest, UsuarioModel>());
+            var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<UsuarioRequest, Usuario>());
             var mapper = configuracao.CreateMapper();
 
             return mapper;

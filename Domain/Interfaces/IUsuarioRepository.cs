@@ -6,7 +6,7 @@ namespace Domain.Interfaces
 {
     public interface IUsuarioRepository
     {
-        Task<UsuarioModel> GetUsuarioByDto(UsuarioRequest dto);
+        Task<Usuario> GetUsuarioByDto(UsuarioRequest dto);
         Task<ActionResult<dynamic>> GetUsuario();
         Task<ActionResult<dynamic>> GetUsuario(int id);
         Task<ActionResult<dynamic>> PutUsuario(int id, UsuarioPutRequest usuario);
