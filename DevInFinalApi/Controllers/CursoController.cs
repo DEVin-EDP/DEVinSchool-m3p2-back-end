@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using Domain.DTOs;
 using Domain.Models;
 using Domain.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -40,14 +41,14 @@ namespace DevInFinalApi.Controllers
 
         [HttpPost]
         //[Authorize(Roles = ("admin"))]
-        public async Task<ActionResult<dynamic>> PostCurso(Curso request)
+        public async Task<ActionResult<dynamic>> PostCurso(CursoResponse request)
         {
             return await _CursoService.PostCurso(request);
         }
 
         [HttpPut("{id}")]
         //[Authorize(Roles = ("admin"))]
-        public async Task<ActionResult<dynamic>> PutCurso(int id, Curso request)
+        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
         {
             return await _CursoService.PutCurso(id, request);
         }

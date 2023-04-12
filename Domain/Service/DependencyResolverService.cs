@@ -9,6 +9,7 @@ namespace Domain.Service
         {
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ICategoriaCursoService, CategoriaCursoService>();
+            services.AddScoped<ICursoService, CursoService>();
         }
     }
 

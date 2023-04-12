@@ -26,7 +26,17 @@ namespace Infrastructure.Service
 
             try
             {
-                List<Curso> curso = await _context.Curso.ToListAsync();
+                List<CursoResponse> curso = await _context.Curso.Select(s => new CursoResponse()
+                {
+                    Nome = s.Nome,
+                    Resumo = s.Resumo,
+                    Informacao = s.Informacao,
+                    Link = s.Link,
+                    CargaHoraria = s.CargaHoraria,
+                    CursoAtivo = s.CursoAtivo,
+                    CategoriaCursoId = s.CategoriaCursoId,
+                }
+                ).ToListAsync();
 
                 return curso;
             }
@@ -86,13 +96,8 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o retorno dos dados dos cursos." };
             }
         }
-        public async Task<ActionResult<dynamic>> PutCurso(int id, Curso request)
+        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
         {
-            if (id != request.Id)
-            {
-                return new { Message = "O Id do curso informado é diferente do Id da URL." };
-            }
-
             try
             {
                 Curso curso = await _context.Curso.FindAsync(id);
@@ -121,7 +126,7 @@ namespace Infrastructure.Service
             }
         }
 
-        public async Task<ActionResult<dynamic>> PostCurso(Curso request)
+        public async Task<ActionResult<dynamic>> PostCurso(CursoResponse request)
         {
             if (_context.Curso == null)
             {
@@ -130,7 +135,10 @@ namespace Infrastructure.Service
 
             try
             {
-                _context.Curso.Add(request);
+                IMapper mapper = ConfigurePostMapper();
+                Curso curso = mapper.Map<Curso>(request);
+
+                _context.Curso.Add(curso);
                 await _context.SaveChangesAsync();
 
                 return true;
@@ -175,6 +183,14 @@ namespace Infrastructure.Service
         private bool ExisteCurso(int id)
         {
             return _context.Curso.Any(a => a.Id == id);
+        }
+
+        private static IMapper ConfigurePostMapper()
+        {
+            var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<CursoResponse, Curso>());
+            var mapper = configuracao.CreateMapper();
+
+            return mapper;
         }
     }
 }
