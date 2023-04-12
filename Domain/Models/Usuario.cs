@@ -2,7 +2,7 @@
 
 namespace Domain.Models
 {
-    public class UsuarioModel : _BaseEntity
+    public class Usuario : _BaseEntity
     {
         [Column("nome")]
         public string Nome { get; set; }
@@ -20,5 +20,9 @@ namespace Domain.Models
         public bool UsuarioAtivo { get; set; }
         [Column("data_cadastro")]
         public DateTime DataCadastro { get; set; } = DateTime.Now;
+        [Column("perfil_funcao")]
+        [ForeignKey("IdPerfil")]
+        public int PerfilId { get; set; }
+        public Perfil Perfil { get; set; }
     }
 }

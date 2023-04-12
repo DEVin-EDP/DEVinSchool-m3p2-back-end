@@ -16,7 +16,7 @@ namespace Domain.Service
         {
             _config = config;
         }
-        public string GenerateToken(UsuarioModel usuario)
+        public string GenerateToken(Usuario usuario)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -32,6 +32,7 @@ namespace Domain.Service
                 new Claim("Id", Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Nome),
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email),
+                new Claim(ClaimTypes.Role, usuario.Perfil.Nome),
                 new Claim(JwtRegisteredClaimNames.Jti,
                 Guid.NewGuid().ToString())
              }),

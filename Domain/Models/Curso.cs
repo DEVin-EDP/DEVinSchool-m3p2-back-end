@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models
 {
-    public class CursoModel : _BaseEntity
+    public class Curso : _BaseEntity
     {
         [Column("nome")]
         public string Nome { get; set; }
@@ -15,9 +15,12 @@ namespace Domain.Models
         public int CargaHoraria { get; set; }
         [Column("imagem_curso")]
         public string Link { get; set; }
-        [Column("categoria_curso")]
-        public CategoriaEnum CategoriaCurso { get; set; }
         [Column("curso_ativo")]
         public bool CursoAtivo { get; set; }
+        [Column("categoria_curso")]
+        [ForeignKey("IdCurso")]
+        public int CategoriaCursoId { get; set; }
+        public CategoriaCurso CategoriaCurso { get; set; }
     }
 }
+
