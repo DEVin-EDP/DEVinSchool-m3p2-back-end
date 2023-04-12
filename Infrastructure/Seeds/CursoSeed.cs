@@ -5,9 +5,9 @@ namespace Infrastructure.Seeds
 {
     internal static class CursoSeed
     {
-        public static List<CursoModel> Seed { get; set; } = new List<CursoModel>()
+        public static List<Curso> Seed { get; set; } = new List<Curso>()
         {
-            new CursoModel
+            new Curso
             {
                 Id = 1,
                 Nome= "Curso de Java",
@@ -15,10 +15,10 @@ namespace Infrastructure.Seeds
                 Resumo = "Introdução ao Java",
                 Link = "java.com",
                 CargaHoraria = 60,
-                CategoriaCurso = CategoriaEnum.TECNOLOGIA,
+                CategoriaCursoId = 1,
                 CursoAtivo = true
             },
-            new CursoModel
+            new Curso
             {
                 Id = 2,
                 Nome= "Adm de Empresas",
@@ -26,10 +26,10 @@ namespace Infrastructure.Seeds
                 Resumo = "Introdução a Administração de Empresas",
                 Link = "admdeempresas.com",
                 CargaHoraria = 12546,
-                CategoriaCurso = CategoriaEnum.ADMINISTRACAO,
+                CategoriaCursoId = 2,
                 CursoAtivo = true
             },
-            new CursoModel
+            new Curso
             {
                 Id = 3,
                 Nome= "Marketing de Redes Sociais",
@@ -37,10 +37,10 @@ namespace Infrastructure.Seeds
                 Resumo = "aprenda utilizar redes sociais para alavancar o seu negócio",
                 Link = "marketingrs.com",
                 CargaHoraria = 120,
-                CategoriaCurso = CategoriaEnum.MARKETING,
+                CategoriaCursoId = 3,
                 CursoAtivo = true
             },
-            new CursoModel
+            new Curso
             {
                 Id = 4,
                 Nome= "Introdução ao Design Gráfico",
@@ -48,10 +48,9 @@ namespace Infrastructure.Seeds
                 Resumo = "Aprenda técnicas essenciais para ser um Designer gráfico.",
                 Link = "designergrafico.com",
                 CargaHoraria = 60,
-                CategoriaCurso = CategoriaEnum.DESING,
+                CategoriaCursoId = 4,
                 CursoAtivo = true
             },
-
         };
     }
 }
