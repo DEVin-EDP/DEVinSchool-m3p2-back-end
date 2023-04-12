@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using Domain.DTOs;
 using Domain.Interfaces;
 using Domain.Models;
@@ -112,7 +113,10 @@ namespace Infrastructure.Service
             {
                 return new { Message = "CPF ja cadastrado em nosso sistema." };
             }
-
+            if (!ValidaFoto(request.Foto))
+            {
+                return new { Message = "Tamanho da imagem maior do que 10MB." };
+            }
             try
             {
                 IMapper mapper = ConfigurePostMapper();
@@ -165,6 +169,29 @@ namespace Infrastructure.Service
             return _context.Usuario.Any(a => a.Id == id);
         }
 
+        private bool ValidaFoto(string foto)
+        {
+            if (foto == null)
+            {
+                return true;
+            }
+            using (WebClient webClient = new WebClient())
+            {
+                byte[] FotoData = webClient.DownloadData(foto);
+
+                int Tamanho = FotoData.Length;
+                double TamanhoEmMb = Tamanho / (1024.0 * 1024.0); 
+
+                if (TamanhoEmMb > 10)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
         private static IMapper ConfigurePostMapper()
         {
             var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<UsuarioRequest, Usuario>());
