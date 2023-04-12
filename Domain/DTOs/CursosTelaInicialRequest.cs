@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Domain.DTOs
 {
-    internal class CursosTelaInicialRequest
+    public class CursosTelaInicialRequest
     {
         public string Nome { get; set; }
-        public string Foto { get; set; }
-        public int categoria { get; set; }
+        public string Link { get; set; }
+        public int CategoriaCursoId { get; set; }
     }
 }

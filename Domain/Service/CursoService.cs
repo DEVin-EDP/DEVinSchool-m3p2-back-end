@@ -1,5 +1,6 @@
 ﻿using Domain.DTOs;
 using Domain.Interfaces;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Service
@@ -27,14 +28,14 @@ namespace Domain.Service
             return await _cursoRepository.GetCurso(id);
         }
 
-        public async Task<ActionResult<dynamic>> PutCurso(int id)
+        public async Task<ActionResult<dynamic>> PutCurso(int id, Curso request)
         {
-            return await _cursoRepository.PutCurso(id);
+            return await _cursoRepository.PutCurso(id, request);
         }
 
-        public async Task<ActionResult<dynamic>> PostCurso()
+        public async Task<ActionResult<dynamic>> PostCurso(Curso request)
         {
-            return await _cursoRepository.PostCurso();
+            return await _cursoRepository.PostCurso(request);
         }
 
         public async Task<ActionResult<dynamic>> DeleteCurso(int id)
