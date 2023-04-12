@@ -23,3 +23,4 @@ namespace Domain.Models
         public CategoriaCurso CategoriaCurso { get; set; }
     }
 }
+

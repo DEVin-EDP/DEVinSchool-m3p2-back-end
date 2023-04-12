@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Domain.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Domain.Service
 {
@@ -6,7 +7,10 @@ namespace Domain.Service
     {
         public static void Register(IServiceCollection services) 
         {
+            services.AddScoped<IAutenticacaoService, AutenticacaoService>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<ICategoriaCursoService, CategoriaCursoService>();
         }
     }
 
