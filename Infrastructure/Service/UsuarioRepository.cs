@@ -19,7 +19,8 @@ namespace Infrastructure.Service
 
         public async Task<Usuario> GetUsuarioByDto(LoginDTO dto)
         {
-            return await _context.Usuario.Include(i => i.DataCadastro)
+            return await _context.Usuario
+                        .Include(i => i.Perfil)
                         .FirstOrDefaultAsync(f => f.Email == dto.Email && f.Senha == dto.Senha);
         }
 
