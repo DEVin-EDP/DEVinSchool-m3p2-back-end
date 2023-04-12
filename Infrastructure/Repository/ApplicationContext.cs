@@ -11,6 +11,7 @@ namespace Infrastructure.Repository
         public DbSet<Curso> Curso { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<CursoSalvo> CursoSalvo { get; set; }
+        public DbSet<CategoriaCurso> CategoriaCurso { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
