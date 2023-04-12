@@ -5,12 +5,12 @@ namespace Domain.Service
 {
     public static class DependencyResolverService
     {
-        public static void Register(IServiceCollection services)
+        public static void Register(IServiceCollection services) 
         {
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
-
+            services.AddScoped<ICategoriaCursoService, CategoriaCursoService>();
         }
     }
 

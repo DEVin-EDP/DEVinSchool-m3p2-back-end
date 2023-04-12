@@ -17,12 +17,12 @@ namespace Domain.Service
         {
             return await _usuarioRepository.GetUsuario();
         }
-
+        
         public async Task<ActionResult<dynamic>> GetUsuario(int id)
         {
             return await _usuarioRepository.GetUsuario(id);
         }
-
+        
         public async Task<ActionResult<dynamic>> PutUsuario(int id, UsuarioPutRequest request)
         {
             return await _usuarioRepository.PutUsuario(id, request);

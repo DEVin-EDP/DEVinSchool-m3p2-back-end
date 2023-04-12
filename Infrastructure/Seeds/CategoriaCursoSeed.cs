@@ -13,7 +13,7 @@ namespace Infrastructure.Seeds
             },
             new CategoriaCurso
             {
-                Id = 2,
+                Id = 2, 
                 Titulo = "Administração"
             },
             new CategoriaCurso

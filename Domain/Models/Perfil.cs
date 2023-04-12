@@ -11,7 +11,7 @@ namespace Domain.Models
 
         public Perfil() { }
 
-        public Perfil(int id, string nome)
+        public Perfil(int id, string nome) 
         {
             Id = id;
             Nome = nome;

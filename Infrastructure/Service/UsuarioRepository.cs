@@ -12,9 +12,9 @@ namespace Infrastructure.Service
     {
         protected readonly ApplicationContext _context;
 
-        public UsuarioRepository(ApplicationContext context)
-        {
-            _context = context;
+        public UsuarioRepository(ApplicationContext context) 
+        {  
+            _context = context; 
         }
 
         public async Task<Usuario> GetUsuarioByDto(LoginDTO dto)
@@ -78,7 +78,7 @@ namespace Infrastructure.Service
             {
                 Usuario usuario = await _context.Usuario.FindAsync(id);
 
-                if (usuario == null)
+                if(usuario == null)
                 {
                     return new { Message = "O Id do usuário informado é diferente do Id da URL." };
                 }
@@ -92,7 +92,7 @@ namespace Infrastructure.Service
 
                 return true;
             }
-            catch
+            catch 
             {
                 return new { Message = "Ocorreu erro durante a atualização do usuário." };
             }
@@ -135,7 +135,7 @@ namespace Infrastructure.Service
             {
                 return new { Message = "O Id do usuário informado não existe." };
             }
-            if (_context.Usuario == null)
+            if(_context.Usuario == null)
             {
                 return new { Message = "Não foi possível retornar a informação." };
             }
@@ -144,7 +144,7 @@ namespace Infrastructure.Service
             {
                 var usuario = await _context.Usuario.FindAsync(id);
 
-                if (usuario == null)
+                if(usuario == null)
                 {
                     return new { Message = "Não foi possível retornar a informação." };
                 }
