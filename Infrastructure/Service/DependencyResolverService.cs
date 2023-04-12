@@ -1,4 +1,5 @@
-﻿using Infrastructure.Repository;
+﻿using Domain.Interfaces;
+using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,7 @@ namespace Infrastructure.Service
                 x => x.MigrationsAssembly("Infrastructure")));
 
 
-            //services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }
 
         public static void MigrateDatabase(IServiceProvider serviceProvider)

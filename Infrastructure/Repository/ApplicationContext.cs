@@ -4,7 +4,7 @@ using Infrastructure.Seeds;
 
 namespace Infrastructure.Repository
 {
-    internal class ApplicationContext : DbContext
+    public class ApplicationContext : DbContext
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
