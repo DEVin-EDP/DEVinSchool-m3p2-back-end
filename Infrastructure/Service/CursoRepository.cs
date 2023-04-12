@@ -83,7 +83,7 @@ namespace Infrastructure.Service
                     Nome = x.Nome,
                     Link = x.Link,
                     CategoriaCursoId = x.CategoriaCursoId
-                }).FirstAsync();
+                }).ToListAsync();
 
                 if (curso == null)
                 {
