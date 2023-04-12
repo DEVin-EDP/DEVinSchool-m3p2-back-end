@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230411165209_InitialMigration")]
+    [Migration("20230412002754_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -25,7 +25,47 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Models.CursoModel", b =>
+            modelBuilder.Entity("Domain.Models.CategoriaCurso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("titulo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CategoriaCurso");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Titulo = "Tecnologia"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Titulo = "Administração"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Titulo = "Marketing"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Titulo = "Design"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Models.Curso", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,10 +77,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("carga_horaria");
 
-                    b.Property<string>("CategoriaCurso")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                    b.Property<int>("CategoriaCursoId")
+                        .HasColumnType("int")
                         .HasColumnName("categoria_curso");
 
                     b.Property<bool>("CursoAtivo")
@@ -69,6 +107,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaCursoId");
+
                     b.ToTable("Curso");
 
                     b.HasData(
@@ -76,7 +116,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             CargaHoraria = 60,
-                            CategoriaCurso = "TECNOLOGIA",
+                            CategoriaCursoId = 1,
                             CursoAtivo = true,
                             Informacao = "Curso de Java para iniciantes",
                             Link = "java.com",
@@ -87,7 +127,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 2,
                             CargaHoraria = 12546,
-                            CategoriaCurso = "ADMINISTRACAO",
+                            CategoriaCursoId = 2,
                             CursoAtivo = true,
                             Informacao = "Administração de Empresas para iniciantes",
                             Link = "admdeempresas.com",
@@ -98,7 +138,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 3,
                             CargaHoraria = 120,
-                            CategoriaCurso = "MARKETING",
+                            CategoriaCursoId = 3,
                             CursoAtivo = true,
                             Informacao = "Introdução a marketing utilizando redes sociais",
                             Link = "marketingrs.com",
@@ -109,7 +149,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 4,
                             CargaHoraria = 60,
-                            CategoriaCurso = "DESING",
+                            CategoriaCursoId = 4,
                             CursoAtivo = true,
                             Informacao = "Técnicas de Designer gráfico.",
                             Link = "designergrafico.com",
@@ -118,7 +158,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Models.CursoSalvoModel", b =>
+            modelBuilder.Entity("Domain.Models.CursoSalvo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,10 +169,8 @@ namespace Infrastructure.Migrations
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("DataCursoSalvo")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                    b.Property<DateTime>("DataCursoSalvo")
+                        .HasColumnType("datetime2")
                         .HasColumnName("data_curso_salvo");
 
                     b.Property<string>("StatusCurso")
@@ -153,7 +191,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("CursoSalvo");
                 });
 
-            modelBuilder.Entity("Domain.Models.UsuarioModel", b =>
+            modelBuilder.Entity("Domain.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -207,7 +245,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7289),
+                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7300),
                             Email = "teste@gmail.com",
                             Foto = "https://i.pinimg.com/236x/37/01/e7/3701e763f6ded4234b68d8fac1a9fa85.jpg",
                             Idade = 30,
@@ -219,7 +257,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 2,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7823),
+                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7698),
                             Email = "tiago@gmail.com",
                             Foto = "https://i.pinimg.com/236x/05/0b/72/050b721378546e519bd6e33c4ccf9630.jpg",
                             Idade = 22,
@@ -231,7 +269,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 3,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7826),
+                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7700),
                             Email = "josé@gmail.com",
                             Foto = "https://pbs.twimg.com/profile_images/1268204267749494788/az__pHAX_400x400.jpg",
                             Idade = 55,
@@ -243,7 +281,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 5,
                             CPF = "12345278412",
-                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7828),
+                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7702),
                             Email = "ana@mail.com",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 32,
@@ -255,7 +293,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 6,
                             CPF = "78945612345",
-                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7830),
+                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7704),
                             Email = "callas@mail.com",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 30,
@@ -267,7 +305,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 7,
                             CPF = "23456242189",
-                            DataCadastro = new DateTime(2023, 4, 11, 13, 52, 9, 574, DateTimeKind.Local).AddTicks(7835),
+                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7716),
                             Email = "rita@mail.com\"",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 82,
@@ -277,15 +315,26 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Models.CursoSalvoModel", b =>
+            modelBuilder.Entity("Domain.Models.Curso", b =>
                 {
-                    b.HasOne("Domain.Models.CursoModel", "Curso")
+                    b.HasOne("Domain.Models.CategoriaCurso", "CategoriaCurso")
+                        .WithMany()
+                        .HasForeignKey("CategoriaCursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CategoriaCurso");
+                });
+
+            modelBuilder.Entity("Domain.Models.CursoSalvo", b =>
+                {
+                    b.HasOne("Domain.Models.Curso", "Curso")
                         .WithMany()
                         .HasForeignKey("CursoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Models.UsuarioModel", "Usuario")
+                    b.HasOne("Domain.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)

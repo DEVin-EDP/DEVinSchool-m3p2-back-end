@@ -4,9 +4,9 @@ namespace Infrastructure.Seeds
 {
     internal static class UsuarioSeed
     {
-        public static List<UsuarioModel> Seed { get; set; } = new List<UsuarioModel>()
+        public static List<Usuario> Seed { get; set; } = new List<Usuario>()
         {
-            new UsuarioModel
+            new Usuario
             {
                 Id = 1,
                 Nome= "teste",
@@ -18,7 +18,7 @@ namespace Infrastructure.Seeds
                 Foto = "https://i.pinimg.com/236x/37/01/e7/3701e763f6ded4234b68d8fac1a9fa85.jpg",
                 UsuarioAtivo = true,
             },
-            new UsuarioModel
+            new Usuario
             {
                 Id = 2,
                 Nome= "Tiago",
@@ -30,7 +30,7 @@ namespace Infrastructure.Seeds
                 Foto = "https://i.pinimg.com/236x/05/0b/72/050b721378546e519bd6e33c4ccf9630.jpg",
                 UsuarioAtivo = true,
             },
-            new UsuarioModel
+            new Usuario
             {
                 Id = 3,
                 Nome= "José",
@@ -42,7 +42,7 @@ namespace Infrastructure.Seeds
                 Foto = "https://pbs.twimg.com/profile_images/1268204267749494788/az__pHAX_400x400.jpg",
                 UsuarioAtivo = true,
             },
-            new UsuarioModel
+            new Usuario
             {
                 Id = 5,
                 Nome= "Ana Martha",
@@ -54,7 +54,7 @@ namespace Infrastructure.Seeds
                 Foto = "https://example.com/myphoto.jpg",
                 UsuarioAtivo = true,
             },
-            new UsuarioModel
+            new Usuario
             {
                 Id = 6,
                 Nome= "Maria Callas",
@@ -66,7 +66,7 @@ namespace Infrastructure.Seeds
                 Foto = "https://example.com/myphoto.jpg",
                 UsuarioAtivo = true,
             },
-            new UsuarioModel
+            new Usuario
             {
                 Id = 7,
                 Nome= "Rita Lee",
