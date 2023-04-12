@@ -117,6 +117,7 @@ namespace Infrastructure.Service
             {
                 return new { Message = "Tamanho da imagem maior do que 10MB." };
             }
+
             try
             {
                 IMapper mapper = ConfigurePostMapper();
@@ -163,7 +164,6 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o processo a exclusão do usuário." };
             }
         }
-
         private bool ExisteUsuario(int id)
         {
             return _context.Usuario.Any(a => a.Id == id);
@@ -175,21 +175,23 @@ namespace Infrastructure.Service
             {
                 return true;
             }
+            var TamanhoEmMb = DownloadFoto(foto);
+
+            if (TamanhoEmMb > 10)
+            {
+                return false;
+            }
+            return true;
+        }
+        private double DownloadFoto(string foto)
+        {
             using (WebClient webClient = new WebClient())
             {
                 byte[] FotoData = webClient.DownloadData(foto);
 
                 int Tamanho = FotoData.Length;
-                double TamanhoEmMb = Tamanho / (1024.0 * 1024.0); 
-
-                if (TamanhoEmMb > 10)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                double TamanhoEmMb = Tamanho / (1024.0 * 1024.0);
+                return TamanhoEmMb;
             }
         }
         private static IMapper ConfigurePostMapper()
