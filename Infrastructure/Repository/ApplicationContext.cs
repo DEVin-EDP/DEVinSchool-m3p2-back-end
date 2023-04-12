@@ -22,6 +22,7 @@ namespace Infrastructure.Repository
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
+            modelBuilder.Entity<Perfil>().HasData(PerfilSeed.Seed);
             modelBuilder.Entity<Curso>().HasData(CursoSeed.Seed);
             modelBuilder.Entity<Usuario>().HasData(UsuarioSeed.Seed);
             modelBuilder.Entity<CategoriaCurso>().HasData(CategoriaCursoSeed.Seed);
