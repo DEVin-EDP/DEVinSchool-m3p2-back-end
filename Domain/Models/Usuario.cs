@@ -2,7 +2,7 @@
 
 namespace Domain.Models
 {
-    public class UsuarioModel : _BaseEntity
+    public class Usuario : _BaseEntity
     {
         [Column("nome")]
         public string Nome { get; set; }
