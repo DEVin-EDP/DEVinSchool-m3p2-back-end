@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InnitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,23 +27,16 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuario",
+                name: "Perfil",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    idade = table.Column<int>(type: "int", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    foto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ativo = table.Column<bool>(type: "bit", nullable: false),
-                    data_cadastro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.PrimaryKey("PK_Perfil", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,6 +61,33 @@ namespace Infrastructure.Migrations
                         column: x => x.categoria_curso,
                         principalTable: "CategoriaCurso",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    idade = table.Column<int>(type: "int", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    foto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ativo = table.Column<bool>(type: "bit", nullable: false),
+                    data_cadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    perfil_funcao = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Usuario_Perfil_perfil_funcao",
+                        column: x => x.perfil_funcao,
+                        principalTable: "Perfil",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -111,16 +131,12 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Usuario",
-                columns: new[] { "Id", "cpf", "data_cadastro", "email", "foto", "idade", "nome", "senha", "ativo" },
+                table: "Perfil",
+                columns: new[] { "id", "nome" },
                 values: new object[,]
                 {
-                    { 1, "11122233308", new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7300), "teste@gmail.com", "https://i.pinimg.com/236x/37/01/e7/3701e763f6ded4234b68d8fac1a9fa85.jpg", 30, "teste", "teste123", true },
-                    { 2, "11122233308", new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7698), "tiago@gmail.com", "https://i.pinimg.com/236x/05/0b/72/050b721378546e519bd6e33c4ccf9630.jpg", 22, "Tiago", "tester12345678", true },
-                    { 3, "11122233308", new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7700), "josé@gmail.com", "https://pbs.twimg.com/profile_images/1268204267749494788/az__pHAX_400x400.jpg", 55, "José", "tester12345678", true },
-                    { 5, "12345278412", new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7702), "ana@mail.com", "https://example.com/myphoto.jpg", 32, "Ana Martha", "ana12345", true },
-                    { 6, "78945612345", new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7704), "callas@mail.com", "https://example.com/myphoto.jpg", 30, "Maria Callas", "123asdfg", true },
-                    { 7, "23456242189", new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7716), "rita@mail.com\"", "https://example.com/myphoto.jpg", 82, "Rita Lee", "123asdfgh", true }
+                    { 1, "usuario" },
+                    { 2, "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -132,6 +148,19 @@ namespace Infrastructure.Migrations
                     { 2, 12546, 2, true, "Administração de Empresas para iniciantes", "admdeempresas.com", "Adm de Empresas", "Introdução a Administração de Empresas" },
                     { 3, 120, 3, true, "Introdução a marketing utilizando redes sociais", "marketingrs.com", "Marketing de Redes Sociais", "aprenda utilizar redes sociais para alavancar o seu negócio" },
                     { 4, 60, 4, true, "Técnicas de Designer gráfico.", "designergrafico.com", "Introdução ao Design Gráfico", "Aprenda técnicas essenciais para ser um Designer gráfico." }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Usuario",
+                columns: new[] { "Id", "cpf", "data_cadastro", "email", "foto", "idade", "nome", "perfil_funcao", "senha", "ativo" },
+                values: new object[,]
+                {
+                    { 1, "11122233308", new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(4948), "teste@gmail.com", "https://i.pinimg.com/236x/37/01/e7/3701e763f6ded4234b68d8fac1a9fa85.jpg", 30, "teste", 2, "teste123", true },
+                    { 2, "11122233308", new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5605), "tiago@gmail.com", "https://i.pinimg.com/236x/05/0b/72/050b721378546e519bd6e33c4ccf9630.jpg", 22, "Tiago", 1, "tester12345678", true },
+                    { 3, "11122233308", new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5607), "josé@gmail.com", "https://pbs.twimg.com/profile_images/1268204267749494788/az__pHAX_400x400.jpg", 55, "José", 1, "tester12345678", true },
+                    { 5, "12345278412", new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5609), "ana@mail.com", "https://example.com/myphoto.jpg", 32, "Ana Martha", 1, "ana12345", true },
+                    { 6, "78945612345", new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5611), "callas@mail.com", "https://example.com/myphoto.jpg", 30, "Maria Callas", 1, "123asdfg", true },
+                    { 7, "23456242189", new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5617), "rita@mail.com\"", "https://example.com/myphoto.jpg", 82, "Rita Lee", 1, "rita1234", true }
                 });
 
             migrationBuilder.CreateIndex(
@@ -148,6 +177,11 @@ namespace Infrastructure.Migrations
                 name: "IX_CursoSalvo_UsuarioId",
                 table: "CursoSalvo",
                 column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuario_perfil_funcao",
+                table: "Usuario",
+                column: "perfil_funcao");
         }
 
         /// <inheritdoc />
@@ -164,6 +198,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "CategoriaCurso");
+
+            migrationBuilder.DropTable(
+                name: "Perfil");
         }
     }
 }
