@@ -3,11 +3,6 @@ using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Service
 {
@@ -21,6 +16,7 @@ namespace Infrastructure.Service
 
 
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ICursoRepository, CursoRepository>();
             services.AddScoped<ICategoriaCursoRepository, CategoriaCursoRepository>();
             services.AddScoped<ICursoSalvoRepository, CursoSalvoRepository>();
         }

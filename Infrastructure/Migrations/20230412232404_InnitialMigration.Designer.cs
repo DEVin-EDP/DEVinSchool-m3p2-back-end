@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230412002754_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230412232404_InnitialMigration")]
+    partial class InnitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -191,6 +191,37 @@ namespace Infrastructure.Migrations
                     b.ToTable("CursoSalvo");
                 });
 
+            modelBuilder.Entity("Domain.Models.Perfil", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("nome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Perfil");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nome = "usuario"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nome = "admin"
+                        });
+                });
+
             modelBuilder.Entity("Domain.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -227,6 +258,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("nome");
 
+                    b.Property<int>("PerfilId")
+                        .HasColumnType("int")
+                        .HasColumnName("perfil_funcao");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -238,6 +273,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PerfilId");
+
                     b.ToTable("Usuario");
 
                     b.HasData(
@@ -245,11 +282,12 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7300),
+                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(4948),
                             Email = "teste@gmail.com",
                             Foto = "https://i.pinimg.com/236x/37/01/e7/3701e763f6ded4234b68d8fac1a9fa85.jpg",
                             Idade = 30,
                             Nome = "teste",
+                            PerfilId = 2,
                             Senha = "teste123",
                             UsuarioAtivo = true
                         },
@@ -257,11 +295,12 @@ namespace Infrastructure.Migrations
                         {
                             Id = 2,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7698),
+                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5605),
                             Email = "tiago@gmail.com",
                             Foto = "https://i.pinimg.com/236x/05/0b/72/050b721378546e519bd6e33c4ccf9630.jpg",
                             Idade = 22,
                             Nome = "Tiago",
+                            PerfilId = 1,
                             Senha = "tester12345678",
                             UsuarioAtivo = true
                         },
@@ -269,11 +308,12 @@ namespace Infrastructure.Migrations
                         {
                             Id = 3,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7700),
+                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5607),
                             Email = "josé@gmail.com",
                             Foto = "https://pbs.twimg.com/profile_images/1268204267749494788/az__pHAX_400x400.jpg",
                             Idade = 55,
                             Nome = "José",
+                            PerfilId = 1,
                             Senha = "tester12345678",
                             UsuarioAtivo = true
                         },
@@ -281,11 +321,12 @@ namespace Infrastructure.Migrations
                         {
                             Id = 5,
                             CPF = "12345278412",
-                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7702),
+                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5609),
                             Email = "ana@mail.com",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 32,
                             Nome = "Ana Martha",
+                            PerfilId = 1,
                             Senha = "ana12345",
                             UsuarioAtivo = true
                         },
@@ -293,11 +334,12 @@ namespace Infrastructure.Migrations
                         {
                             Id = 6,
                             CPF = "78945612345",
-                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7704),
+                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5611),
                             Email = "callas@mail.com",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 30,
                             Nome = "Maria Callas",
+                            PerfilId = 1,
                             Senha = "123asdfg",
                             UsuarioAtivo = true
                         },
@@ -305,12 +347,13 @@ namespace Infrastructure.Migrations
                         {
                             Id = 7,
                             CPF = "23456242189",
-                            DataCadastro = new DateTime(2023, 4, 12, 1, 11, 54, 604, DateTimeKind.Local).AddTicks(7716),
+                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5617),
                             Email = "rita@mail.com\"",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 82,
                             Nome = "Rita Lee",
-                            Senha = "123asdfgh",
+                            PerfilId = 1,
+                            Senha = "rita1234",
                             UsuarioAtivo = true
                         });
                 });
@@ -343,6 +386,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("Curso");
 
                     b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Domain.Models.Usuario", b =>
+                {
+                    b.HasOne("Domain.Models.Perfil", "Perfil")
+                        .WithMany()
+                        .HasForeignKey("PerfilId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Perfil");
                 });
 #pragma warning restore 612, 618
         }
