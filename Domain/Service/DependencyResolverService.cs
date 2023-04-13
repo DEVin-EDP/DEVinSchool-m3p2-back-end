@@ -11,6 +11,7 @@ namespace Domain.Service
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ICategoriaCursoService, CategoriaCursoService>();
+            services.AddScoped<ICursoService, CursoService>();
         }
     }
 
