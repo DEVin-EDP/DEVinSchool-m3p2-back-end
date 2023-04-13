@@ -18,7 +18,7 @@ namespace DevInFinalApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = ("usuario"))]
+        [Authorize(Roles = ("usuario, admin"))]
         public async Task<ActionResult<dynamic>> GetCategoriaCurso()
         {
             return await _categoriaCursoService.GetCategoriaCurso();
@@ -32,6 +32,7 @@ namespace DevInFinalApi.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = ("admin"))]
         public async Task<ActionResult<dynamic>> PostCategoriaCurso(CategoriaCursoRequestDto request)
         {
             return await _categoriaCursoService.PostCategoriaCurso(request);
