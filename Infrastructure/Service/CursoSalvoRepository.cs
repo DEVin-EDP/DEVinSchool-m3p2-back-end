@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Abstract;
 using Domain.DTOs;
 using Domain.Interfaces;
 using Domain.Models;
@@ -12,71 +13,78 @@ namespace Infrastructure.Service
     {
         protected readonly ApplicationContext _context;
 
-        public CursoSalvoRepository(ApplicationContext context) 
-        {  
-            _context = context; 
+        public CursoSalvoRepository(ApplicationContext context)
+        {
+            _context = context;
         }
 
-        public async Task<ActionResult<dynamic>> GetCursoSalvo(int id, CursoSalvoPutRequest? request);
+        public async Task<ActionResult<dynamic>> GetCursoSalvo(int id, CursoSalvoRequest? request)
         {
-          
-            if (Enum.TryParse(request, out StatusCursoEnum.CONCLUIDO)){
-                    request == StatusCursoEnum.CONCLUIDO
-            } else if(Enum.TryParse(request, out StatusCursoEnum.REALIZAR_NO_FUTURO)){
-                    request == StatusCursoEnum.REALIZAR_NO_FUTURO
-            } else if(Enum.TryParse(request, out StatusCursoEnum.EM_ANDAMENTO)){
-                    request == StatusCursoEnum.EM_ANDAMENTO
-            } else {
+
+            if (Enum.TryParse(request, out StatusCursoEnum.CONCLUIDO))
+            {
+                request == StatusCursoEnum.CONCLUIDO
+            }
+            else if (Enum.TryParse(request, out StatusCursoEnum.REALIZAR_NO_FUTURO))
+            {
+                request == StatusCursoEnum.REALIZAR_NO_FUTURO
+            }
+            else if (Enum.TryParse(request, out StatusCursoEnum.EM_ANDAMENTO))
+            {
+                request == StatusCursoEnum.EM_ANDAMENTO
+            }
+            else
+            {
                 return new { Message = "O valor informado não condiz com o esperado" };
-            }            
+            }
 
             try
             {
-
                 if (_context.CursoSalvo == null)
-            {
-                return new { Message = "Não foi possível retornar a informação." };
-            }
-                var CursoSalvo = _context.CursoSalvo.FindAsync(id);
-
-                if(request != null)
-                {
-                    var CursoSalvo = CursoSalvo.Where(a => a.StatusCurso == enum.StatusCursoEnum);
-                }
-
-
-                if (CursoSalvo == null)
                 {
                     return new { Message = "Não foi possível retornar a informação." };
                 }
+                var cursoSalvo = _context.CursoSalvo.FindAsync(id);
 
-                return CursoSalvo;
-            }
-            catch
-            {
+                if (request != null)
+                {
+                    var cursoStatus = _context.CursoSalvo.Where(a => a.StatusCurso == enum.StatusCursoEnum);
+                }
+
+                #if (cursoSalvo == null)
+                {
+                    return new { message = "Não foi possível retornar a informação." };
+                }
+
+                    return cursoSalvo;
+
+             }
+             catch
+             {
                 return new { Message = "Ocorreu erro durante o retorno dos dados dos cursos salvos." };
-            }
-        }
+             }
+    }
+        
 
-        public async Task<ActionResult<dynamic>> PutCursoSalvo(int id, Int CursoSalvoPutRequest cursoSalvo);
+        public async Task<ActionResult<dynamic>> PutCursoSalvo(int id, CursoSalvoRequest request)
         {
-            if (id != request.Id)
+            if (id != request.CursoId)
             {
                 return new { Message = "O Id do usuário informado é diferente do Id da URL." };
             }
 
             try
             {
-                CursoSalvo CursoSalvo = await _context.CursoSalvo.FindAsync(id);
+                CursoSalvo cursoSalvo = await _context.CursoSalvo.FindAsync(id);
 
-                if(CursoSalvo == null)
+                if(cursoSalvo == null)
                 {
                     return new { Message = "O Id do usuário informado é diferente do Id da URL." };
                 }
 
-                CursoSalvo.StatusCurso = request.StatusCurso;
+                cursoSalvo.StatusCurso = cursoSalvo.StatusCurso;
 
-                _context.Entry(CursoSalvo).State = EntityState.Modified;
+                _context.Entry(cursoSalvo).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
                 return Ok();
@@ -87,7 +95,7 @@ namespace Infrastructure.Service
             }
         }
 
-        public async Task<ActionResult<dynamic>> PostCursoSalvo(CursoSalvoRequest request);
+        public async Task<ActionResult<dynamic>> PostCursoSalvo(CursoSalvoRequest request)
         {
             if (_context.CursoSalvo == null)
             {
@@ -97,24 +105,31 @@ namespace Infrastructure.Service
             {
                 return new { Message = "Curso ja está salvo em nosso sistema." };
             }
-            
-            if (Enum.TryParse(request, out StatusCursoEnum.CONCLUIDO)){
-                    request == StatusCursoEnum.CONCLUIDO
-            } else if(Enum.TryParse(request, out StatusCursoEnum.REALIZAR_NO_FUTURO)){
-                    request == StatusCursoEnum.REALIZAR_NO_FUTURO
-            } else if(Enum.TryParse(request, out StatusCursoEnum.EM_ANDAMENTO)){
-                    request == StatusCursoEnum.EM_ANDAMENTO
-            } else {
-                return new { Message = "O valor informado não condiz com o esperado" };
-            }        
-    
-            try
+
+    if (Enum.TryParse(request, out StatusCursoEnum.CONCLUIDO))
+    {
+        request == StatusCursoEnum.CONCLUIDO
+            }
+    else if (Enum.TryParse(request, out StatusCursoEnum.REALIZAR_NO_FUTURO))
+    {
+        request == StatusCursoEnum.REALIZAR_NO_FUTURO
+            }
+    else if (Enum.TryParse(request, out StatusCursoEnum.EM_ANDAMENTO))
+    {
+        request == StatusCursoEnum.EM_ANDAMENTO
+            }
+    else
+    {
+        return new { Message = "O valor informado não condiz com o esperado" };
+    }
+
+    try
             {
             
                 IMapper mapper = ConfigurePostMapper();
-                CursoSalvo CursoSalvo = mapper.Map<CursoSalvo>(request);
+                CursoSalvo cursoSalvo = mapper.Map<CursoSalvo>(request);
 
-                _context.CursoSalvo.Add(CursoSalvo);
+                _context.CursoSalvo.Add(cursoSalvo);
                 await _context.SaveChangesAsync();
 
                 return Ok();
@@ -125,7 +140,7 @@ namespace Infrastructure.Service
             }
         }
 
-        public async Task<ActionResult<dynamic>> DeleteCursoSalvo(int id);
+        public async Task<ActionResult<dynamic>> DeleteCursoSalvo(int id)
         {
             try
             {
@@ -140,14 +155,14 @@ namespace Infrastructure.Service
                 return new { Message = "Não foi possível retornar a informação." };
                 }
 
-                var CursoSalvo = await _context.CursoSalvo.FindAsync(id);
+                var cursoSalvo = await _context.CursoSalvo.FindAsync(id);
 
-                if(CursoSalvo == null)
+                if(cursoSalvo == null)
                 {
                     return new { Message = "Não foi possível retornar a informação." };
                 }
 
-                _context.CursoSalvo.Remove(CursoSalvo);
+                _context.CursoSalvo.Remove(cursoSalvo);
                 await _context.SaveChangesAsync();
 
                 return true;
@@ -170,5 +185,5 @@ namespace Infrastructure.Service
 
             return mapper;
         }
-    }
-}
+
+    
