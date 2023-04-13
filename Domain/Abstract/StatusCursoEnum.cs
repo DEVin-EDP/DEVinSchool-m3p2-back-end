@@ -1,4 +1,4 @@
-﻿namespace Domain.Abstract
+namespace Domain.Abstract
 {
     public enum StatusCursoEnum
     {

@@ -18,6 +18,7 @@ namespace Infrastructure.Service
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ICursoRepository, CursoRepository>();
             services.AddScoped<ICategoriaCursoRepository, CategoriaCursoRepository>();
+            services.AddScoped<ICursoSalvoRepository, CursoSalvoRepository>();
         }
 
         public static void MigrateDatabase(IServiceProvider serviceProvider)
