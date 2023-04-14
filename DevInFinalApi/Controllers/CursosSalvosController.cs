@@ -1,3 +1,4 @@
+using Azure.Core;
 using Domain.DTOs;
 using Domain.Service;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ namespace DevInFinalApi.Controllers
     //[Authorize]
     public class CursosSalvosController : ControllerBase
     {
-        private readonly CursosSalvosController _cursoSalvoService;
+        private readonly ICursoSalvoService _cursoSalvoService;
         
 
         public CursosSalvosController(ICursoSalvoService cursoSalvoService)
@@ -18,8 +19,12 @@ namespace DevInFinalApi.Controllers
             _cursoSalvoService = cursoSalvoService;
         }
 
+        public async Task<ActionResult<dynamic>> GetCursoSalvo()
+        {
+            return await _cursoSalvoService.GetCursoSalvo();
+        }
         [HttpGet("{id}")]
-        public async Task<ActionResult<dynamic>> GetCursoSalvo(int id, CursoSalvoPutRequest? request)
+        public async Task<ActionResult<dynamic>> GetCursoSalvo(int id)
         {
             return await _cursoSalvoService.GetCursoSalvo(id);
         }

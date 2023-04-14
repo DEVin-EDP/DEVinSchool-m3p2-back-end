@@ -5,7 +5,7 @@ namespace Domain.DTOs
 {
     public class CursoSalvoPutRequest
     {
-       public string StatusCurso { get; set; }
+        public StatusCursoEnum StatusCurso { get; set; }
 
     }
 }

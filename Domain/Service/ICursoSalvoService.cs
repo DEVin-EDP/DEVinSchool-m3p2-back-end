@@ -6,7 +6,7 @@ namespace Domain.Service
 {
     public interface ICursoSalvoService
     {
-        //Task<ActionResult<dynamic>> GetCursoSalvo();
+        Task<ActionResult<dynamic>> GetCursoSalvo();
         Task<ActionResult<dynamic>> GetCursoSalvo(int id);
         Task<ActionResult<dynamic>> PutCursoSalvo(int id, CursoSalvoPutRequest cursoSalvo);
         Task<ActionResult<dynamic>> PostCursoSalvo(CursoSalvoRequest request);

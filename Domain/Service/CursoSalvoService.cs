@@ -12,6 +12,10 @@ namespace Domain.Service
             _cursoSalvoRepository = cursoSalvoRepository;
         }
 
+        public async Task<ActionResult<dynamic>> GetCursoSalvo()
+        {
+            return await _cursoSalvoRepository.GetCursoSalvo();
+        }
 
         public async Task<ActionResult<dynamic>> GetCursoSalvo(int id)
         {
