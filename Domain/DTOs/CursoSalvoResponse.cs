@@ -5,7 +5,8 @@ namespace Domain.DTOs
     public class CursoSalvoResponse
     {
         public int Id { get; set; }
-        public StatusCursoEnum StatusCurso { get; set; }
+        public int UsuarioId { get; set; }
+        public string StatusCurso { get; set; }
         public DateTime DataCursoSalvo { get; set; }
         public string Nome { get; set; }
         public string Informacao { get; set; }

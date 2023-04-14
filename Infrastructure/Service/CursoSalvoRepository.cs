@@ -31,8 +31,9 @@ namespace Infrastructure.Service
                       (s, c) => new CursoSalvoResponse()
                       {
                           Id = s.Id,
+                          UsuarioId = s.UsuarioId,
                           DataCursoSalvo = s.DataCursoSalvo,
-                          StatusCurso = s.StatusCurso,
+                          StatusCurso = s.StatusCurso.ToString(),
                           Link = s.Curso.Link,
                           Nome = s.Curso.Nome,
                           Informacao = s.Curso.Informacao,
@@ -56,22 +57,23 @@ namespace Infrastructure.Service
             }
 
             var cursoSalvo = await _context.CursoSalvo
-                .Include(i => i.Curso).Where(w => w.Id == id)
+                .Include(i => i.Curso).Where(w => w.UsuarioId == id)
                 .Join(_context.CategoriaCurso,
                       s => s.Curso.CategoriaCursoId,
                       c => c.Id,
                       (s, c) => new CursoSalvoResponse()
                       {
                           Id = s.Id,
+                          UsuarioId = s.UsuarioId,
                           DataCursoSalvo = s.DataCursoSalvo,
-                          StatusCurso = s.StatusCurso,
+                          StatusCurso = s.StatusCurso.ToString(),
                           Link = s.Curso.Link,
                           Nome = s.Curso.Nome,
                           Informacao = s.Curso.Informacao,
                           CargaHoraria = s.Curso.CargaHoraria,
                           CategoriaCurso = c.Titulo,
                           Resumo = s.Curso.Resumo,
-                      }).FirstAsync();
+                      }).ToListAsync();
 
             return cursoSalvo;
         }
@@ -146,6 +148,7 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o processo de inclusão do curso na lista de cursos salvos." };
             }
         }
+
         public async Task<ActionResult<dynamic>> DeleteCursoSalvo(int id)
         {
             if (_context.CursoSalvo == null)
@@ -186,6 +189,7 @@ namespace Infrastructure.Service
         {
             return _context.Usuario.Any(a => a.Id == id);
         }
+
         private bool ExisteCurso(int id)
         {
             return _context.Curso.Any(a => a.Id == id);
