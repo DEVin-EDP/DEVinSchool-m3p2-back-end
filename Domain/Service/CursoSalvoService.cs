@@ -1,4 +1,4 @@
-using Domain.DTOs;
+﻿using Domain.DTOs;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,12 +6,17 @@ namespace Domain.Service
 {
     public class CursoSalvoService : ICursoSalvoService
     {
-        private readonly ICursoSalvoRepository _cursoSalvoRepository;
+        public readonly ICursoSalvoRepository _cursoSalvoRepository;
+
         public CursoSalvoService(ICursoSalvoRepository cursoSalvoRepository)
         {
             _cursoSalvoRepository = cursoSalvoRepository;
         }
 
+        public async Task<ActionResult<dynamic>> GetCursoSalvo()
+        {
+            return await _cursoSalvoRepository.GetCursoSalvo();
+        }
 
         public async Task<ActionResult<dynamic>> GetCursoSalvo(int id)
         {
@@ -23,7 +28,6 @@ namespace Domain.Service
             return await _cursoSalvoRepository.PutCursoSalvo(id, request);
         }
 
-
         public async Task<ActionResult<dynamic>> PostCursoSalvo(CursoSalvoRequest request)
         {
             return await _cursoSalvoRepository.PostCursoSalvo(request);
@@ -33,7 +37,5 @@ namespace Domain.Service
         {
             return await _cursoSalvoRepository.DeleteCursoSalvo(id);
         }
-
     }
-
 }
