@@ -1,5 +1,4 @@
-using Domain.DTOs;
-using Domain.Models;
+﻿using Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Interfaces

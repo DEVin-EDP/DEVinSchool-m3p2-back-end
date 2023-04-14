@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Azure.Core;
-using Domain.Abstract;
-using Domain.DTOs;
+﻿using Domain.DTOs;
 using Domain.Interfaces;
 using Domain.Models;
 using Infrastructure.Repository;
@@ -15,13 +12,15 @@ namespace Infrastructure.Service
         private readonly ApplicationContext _context;
 
         public List<CursoSalvoResponse> CursoSalvos { get; set; }
+
         public CursoSalvoRepository(ApplicationContext context)
         {
             _context = context;
         }
+
         public async Task<ActionResult<dynamic>> GetCursoSalvo()
         {
-            if (_context.CursoSalvo == null)
+            if(_context.CursoSalvo == null)
             {
                 return new { Message = "Não foi possível retornar a informação." };
             }
@@ -31,6 +30,9 @@ namespace Infrastructure.Service
                       c => c.Id,
                       (s, c) => new CursoSalvoResponse()
                       {
+                          Id = s.Id,
+                          DataCursoSalvo = s.DataCursoSalvo,
+                          StatusCurso = s.StatusCurso,
                           Link = s.Curso.Link,
                           Nome = s.Curso.Nome,
                           Informacao = s.Curso.Informacao,
@@ -48,9 +50,9 @@ namespace Infrastructure.Service
             {
                 return new { Message = "Não foi possível retornar a informação." };
             }
-            if (!ExisteCursoSalvo(id))
+            if (!ExisteUsuario(id))
             {
-                return new { Message = "O Id do curso salvo informado é diferente do Id da URL." };
+                return new { Message = "O Id do usuario informado é diferente do Id da URL." };
             }
 
             var cursoSalvo = await _context.CursoSalvo
@@ -60,6 +62,9 @@ namespace Infrastructure.Service
                       c => c.Id,
                       (s, c) => new CursoSalvoResponse()
                       {
+                          Id = s.Id,
+                          DataCursoSalvo = s.DataCursoSalvo,
+                          StatusCurso = s.StatusCurso,
                           Link = s.Curso.Link,
                           Nome = s.Curso.Nome,
                           Informacao = s.Curso.Informacao,
@@ -70,9 +75,10 @@ namespace Infrastructure.Service
 
             return cursoSalvo;
         }
+
         public async Task<ActionResult<dynamic>> PutCursoSalvo(int id, CursoSalvoPutRequest request)
         {
-            if (request == null)
+            if(request == null)
             {
                 return new { Message = "Necessário preencher todas as informações de forma correta." };
             }
@@ -93,21 +99,21 @@ namespace Infrastructure.Service
                 _context.Entry(cursoSalvo).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
-                return cursoSalvo;
-
+                return true;
             }
             catch
             {
                 return new { Message = "Ocorreu erro durante a atualização do curso salvo." };
             }
-            }
+        }
+
         public async Task<ActionResult<dynamic>> PostCursoSalvo(CursoSalvoRequest request)
         {
             if (_context.CursoSalvo == null || _context.Usuario == null || _context.Curso == null)
             {
                 return new { Message = "Não foi possível retornar a informação." };
             }
-            if (!ExisteUsuario(request.UsuarioId) || !ExisteCurso(request.CursoId))
+            if(!ExisteUsuario(request.UsuarioId) || !ExisteCurso(request.CursoId))
             {
                 return new { Message = "O Id do curso ou usuário salvo é diferente do Id da URL." };
             }
@@ -117,7 +123,7 @@ namespace Infrastructure.Service
                 var usuario = await _context.Usuario.FindAsync(request.UsuarioId);
                 var curso = await _context.Curso.FindAsync(request.CursoId);
 
-                if (usuario == null ||  curso == null)
+                if(usuario == null || curso == null)
                 {
                     return new { Message = "Ocorreu erro durante o processo de inclusão do curso na lista de cursos salvos." };
                 }
@@ -170,10 +176,12 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o processo a exclusão do curso salvo." };
             }
         }
+
         private bool ExisteCursoSalvo(int id)
         {
             return _context.CursoSalvo.Any(a => a.Id == id);
         }
+
         private bool ExisteUsuario(int id)
         {
             return _context.Usuario.Any(a => a.Id == id);
