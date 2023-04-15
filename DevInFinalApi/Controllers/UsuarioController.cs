@@ -51,5 +51,12 @@ namespace DevInFinalApi.Controllers
         {
             return await _usuarioService.DeleteUsuario(id);
         }
+
+        [HttpPost("recuperaUsuario")]
+        [AllowAnonymous]
+        public async Task<ActionResult<dynamic>> RecuperaUsuario(string email)
+        {
+            return await _usuarioService.RecuperaUsuario(email);
+        }
     }
 }
