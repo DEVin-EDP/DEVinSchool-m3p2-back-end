@@ -1,6 +1,6 @@
 ﻿namespace DomainUnit.Test
 {
-    internal class CursoSalvoServiceTeste
+    public class CursoSalvoServiceTeste
     {
         [SetUp]
         public void Setup()

@@ -1,6 +1,6 @@
 ﻿namespace DomainUnit.Test
 {
-    internal class EnviaEmailServiceTeste
+    public class EnviaEmailServiceTeste
     {
         [SetUp]
         public void Setup()
