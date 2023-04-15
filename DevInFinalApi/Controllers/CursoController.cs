@@ -32,7 +32,7 @@ namespace DevInFinalApi.Controllers
             return await _CursoService.GetCurso(id);
         }
 
-        [HttpGet("categoria/{id}")]
+        [HttpGet("categoria")]
         [Authorize(Roles = ("usuario, admin"))]
         public async Task<ActionResult<dynamic>> GetCursoCategoria(int id)
         {

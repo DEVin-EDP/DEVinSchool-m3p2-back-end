@@ -1,7 +1,4 @@
-﻿//TODO: Adicionar UsuarioResponse.
-//TODO: incluir perfil para retorno de usuario somente no getall
-
-using System.Net;
+﻿using System.Net;
 using AutoMapper;
 using Domain.DTOs;
 using Domain.Interfaces;
@@ -37,7 +34,7 @@ namespace Infrastructure.Service
 
             try
             {
-                List<Usuario> usuario = await _context.Usuario.ToListAsync();
+                List<Usuario> usuario = await _context.Usuario.Include(i => i.Perfil).ToListAsync();
 
                 return usuario;
             }
@@ -56,15 +53,16 @@ namespace Infrastructure.Service
 
             try
             {
-                var usuario = _context.Usuario.FindAsync(id);
-
+                var usuario = await _context.Usuario.FindAsync(id);
+                IMapper mapper = ConfigureResponseMapper();
+                UsuarioResponse usuarioResponse = mapper.Map<UsuarioResponse>(usuario);
 
                 if (usuario == null)
                 {
                     return new { Message = "Não foi possível retornar a informação." };
                 }
 
-                return usuario;
+                return usuarioResponse;
             }
             catch
             {
@@ -201,6 +199,13 @@ namespace Infrastructure.Service
         private static IMapper ConfigurePostMapper()
         {
             var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<UsuarioRequest, Usuario>());
+            var mapper = configuracao.CreateMapper();
+
+            return mapper;
+        }
+        private static IMapper ConfigureResponseMapper()
+        {
+            var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<Usuario, UsuarioResponse>());
             var mapper = configuracao.CreateMapper();
 
             return mapper;

@@ -23,6 +23,11 @@ namespace Domain.Service
             return await _cursoSalvoRepository.GetCursoSalvo(id);
         }
 
+        public async Task<ActionResult<dynamic>> GetCursoSalvoHistorico(int id)
+        {
+            return await _cursoSalvoRepository.GetCursoSalvoHistorico(id);
+        }
+
         public async Task<ActionResult<dynamic>> PutCursoSalvo(int id, CursoSalvoPutRequest request)
         {
             return await _cursoSalvoRepository.PutCursoSalvo(id, request);

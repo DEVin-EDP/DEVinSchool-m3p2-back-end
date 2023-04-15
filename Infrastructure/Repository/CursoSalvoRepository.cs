@@ -78,7 +78,32 @@ namespace Infrastructure.Service
             return cursoSalvo;
         }
 
-        /// TODO: Implementar EndPoint para pegar cursos salvos pelo hr de salvamento.
+        public async Task<ActionResult<dynamic>> GetCursoSalvoHistorico(int id)
+        {
+            var cursoSalvos = await _context.CursoSalvo
+                .Include(i => i.Curso)
+                .Join(_context.CategoriaCurso,
+                    s => s.Curso.CategoriaCursoId,
+                    c => c.Id,
+                    (s, c) => new CursoSalvoResponse()
+                    {
+                        Id = s.Id,
+                        UsuarioId = s.UsuarioId,
+                        DataCursoSalvo = s.DataCursoSalvo,
+                        StatusCurso = s.StatusCurso.ToString(),
+                        Link = s.Curso.Link,
+                        Nome = s.Curso.Nome,
+                        Informacao = s.Curso.Informacao,
+                        CargaHoraria = s.Curso.CargaHoraria,
+                        CategoriaCurso = c.Titulo,
+                        Resumo = s.Curso.Resumo,
+                    })
+                .Where(i => i.UsuarioId == id)
+                .OrderBy(s => s.DataCursoSalvo)
+                .ToListAsync();
+
+            return cursoSalvos;
+        }
 
         public async Task<ActionResult<dynamic>> PutCursoSalvo(int id, CursoSalvoPutRequest request)
         {

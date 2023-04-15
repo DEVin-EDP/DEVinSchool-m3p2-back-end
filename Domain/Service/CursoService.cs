@@ -25,7 +25,7 @@ namespace Domain.Service
         }
         public async Task<ActionResult<dynamic>> GetCursoCategoria(int id)
         {
-            return await _cursoRepository.GetCurso(id);
+            return await _cursoRepository.GetCursoCategoria(id);
         }
 
         public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)

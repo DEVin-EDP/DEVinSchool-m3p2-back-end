@@ -31,6 +31,13 @@ namespace DevInFinalApi.Controllers
             return await _cursoSalvoService.GetCursoSalvo(id);
         }
 
+        [HttpGet("historico/{id}")]
+        [Authorize(Roles = ("usuario, admin"))]
+        public async Task<ActionResult<dynamic>> GetCursoSalvoHistorico(int id)
+        {
+            return await _cursoSalvoService.GetCursoSalvoHistorico(id);
+        }
+
         [HttpPut("{id}")]
         [Authorize(Roles = ("usuario,admin"))]
         public async Task<ActionResult<dynamic>> PutCursoSalvo(int id, CursoSalvoPutRequest request)
