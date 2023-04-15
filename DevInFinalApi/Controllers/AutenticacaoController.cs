@@ -1,9 +1,7 @@
 ﻿using Domain.DTOs;
 using Domain.Service;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace DevInFinalApi.Controllers
 {

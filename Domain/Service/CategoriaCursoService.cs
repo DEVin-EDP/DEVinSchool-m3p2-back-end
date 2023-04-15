@@ -1,6 +1,5 @@
 ﻿using Domain.DTOs;
 using Domain.Interfaces;
-using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Service
@@ -8,10 +7,12 @@ namespace Domain.Service
     public class CategoriaCursoService : ICategoriaCursoService
     {
         private readonly ICategoriaCursoRepository _categoriaCursoRepository;
+
         public CategoriaCursoService(ICategoriaCursoRepository categoriaCursoRepository)
         {
             _categoriaCursoRepository = categoriaCursoRepository;
         }
+
         public async Task<ActionResult<dynamic>> GetCategoriaCurso()
         {
             return await _categoriaCursoRepository.GetCategoriaCurso();
@@ -27,7 +28,6 @@ namespace Domain.Service
             return await _categoriaCursoRepository.PutCategoriaCurso(id, request);
         }
 
-
         public async Task<ActionResult<dynamic>> PostCategoriaCurso(CategoriaCursoRequestDto request)
         {
             return await _categoriaCursoRepository.PostCategoriaCurso(request);
@@ -37,7 +37,5 @@ namespace Domain.Service
         {
             return await _categoriaCursoRepository.DeleteCategoriaCurso(id);
         }
-
     }
-
 }

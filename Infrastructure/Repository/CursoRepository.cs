@@ -55,7 +55,7 @@ namespace Infrastructure.Service
 
             try
             {
-                var curso = _context.Curso.FindAsync(id);
+                var curso = await _context.Curso.FindAsync(id);
 
                 if (curso == null)
                 {
@@ -78,12 +78,17 @@ namespace Infrastructure.Service
             }
             try
             {
-                var curso = await _context.Curso.Where(x => x.CategoriaCursoId == id).Select(x => new CursosTelaInicialRequest()
+                var curso = await _context.Curso.Include(i => i.CategoriaCurso)
+                    .Where(x => x.CategoriaCursoId == id).ToListAsync();
+
+                IMapper mapper = ConfigureResponseMapper();
+
+                List<CursosTelaInicialRequest> cursoResponse = new();
+
+                foreach (var item in curso)
                 {
-                    Nome = x.Nome,
-                    Link = x.Link,
-                    CategoriaCursoId = x.CategoriaCursoId
-                }).ToListAsync();
+                    cursoResponse.Add(mapper.Map<CursosTelaInicialRequest>(item));
+                }
 
                 if (curso == null)
                 {
@@ -96,6 +101,7 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o retorno dos dados dos cursos." };
             }
         }
+        
         public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
         {
             try
@@ -188,6 +194,14 @@ namespace Infrastructure.Service
         private static IMapper ConfigurePostMapper()
         {
             var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<CursoResponse, Curso>());
+            var mapper = configuracao.CreateMapper();
+
+            return mapper;
+        }
+
+        private static IMapper ConfigureResponseMapper()
+        {
+            var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<Curso, CursosTelaInicialRequest>());
             var mapper = configuracao.CreateMapper();
 
             return mapper;

@@ -58,31 +58,31 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o retorno dos dados da categoria do curso." };
             }
         }
+
         public async Task<ActionResult<dynamic>> PutCategoriaCurso(int id, CategoriaCursoRequestDto request)
         {
+            try
+            {
+                CategoriaCurso categoriacurso = await _context.CategoriaCurso.FindAsync(id);
 
-                try
+                if (categoriacurso == null)
                 {
-                    CategoriaCurso categoriacurso = await _context.CategoriaCurso.FindAsync(id);
-
-                    if (categoriacurso == null)
-                    {
-                        return new { Message = "O Id do usuário informado é diferente do Id da URL." };
-                    }
-
-                    categoriacurso.Titulo = request.Titulo;
-
-
-                    _context.Entry(categoriacurso).State = EntityState.Modified;
-                    await _context.SaveChangesAsync();
-
-                    return true;
+                    return new { Message = "O Id do usuário informado é diferente do Id da URL." };
                 }
-                catch
-                {
-                    return new { Message = "Ocorreu erro durante a atualização da categoria do curso." };
-                }
+
+                categoriacurso.Titulo = request.Titulo;
+
+                _context.Entry(categoriacurso).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return true;
             }
+            catch
+            {
+                return new { Message = "Ocorreu erro durante a atualização da categoria do curso." };
+            }
+        }
+
         public async Task<ActionResult<dynamic>> PostCategoriaCurso(CategoriaCursoRequestDto request)
         {
             try
@@ -131,10 +131,12 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o processo a exclusão da categoria curso." };
             }
         }
+
         private bool ExisteCategoriaCurso(int id)
         {
             return _context.CategoriaCurso.Any(a => a.Id == id);
         }
+
         private static IMapper ConfigurePostMapper()
         {
             var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<CategoriaCursoRequestDto, CategoriaCurso>());

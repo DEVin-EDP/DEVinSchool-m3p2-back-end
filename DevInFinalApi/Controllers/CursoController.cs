@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using Domain.DTOs;
-using Domain.Models;
+﻿using Domain.DTOs;
 using Domain.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +17,7 @@ namespace DevInFinalApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = ("usuario,admin"))]
+        [Authorize(Roles = ("usuario, admin"))]
         public async Task<ActionResult<dynamic>> GetCurso()
         {
             return await _CursoService.GetCurso();
@@ -32,7 +30,7 @@ namespace DevInFinalApi.Controllers
             return await _CursoService.GetCurso(id);
         }
 
-        [HttpGet("categoria/{id}")]
+        [HttpGet("categoria")]
         [Authorize(Roles = ("usuario, admin"))]
         public async Task<ActionResult<dynamic>> GetCursoCategoria(int id)
         {

@@ -1,5 +1,4 @@
 ﻿using Domain.DTOs;
-using Domain.Models;
 using Domain.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +24,7 @@ namespace DevInFinalApi.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = ("admin"))]
+        [Authorize(Roles = ("usuario, admin"))]
         public async Task<ActionResult<dynamic>> GetCategoriaCurso(int id)
         {
             return await _categoriaCursoService.GetCategoriaCurso(id);
