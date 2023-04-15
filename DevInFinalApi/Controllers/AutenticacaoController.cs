@@ -19,7 +19,7 @@ namespace DevInFinalApi.Controllers
             _autenticacaoService = autenticacaoService;
         }
 
-        [HttpPost("api/autenticar")]
+        [HttpPost("autenticar")]
         public async Task<ActionResult<dynamic>> AuthenticateAsync([FromBody] LoginDTO dto)
         {
             return await _autenticacaoService.AutenticarUsuario(dto);
