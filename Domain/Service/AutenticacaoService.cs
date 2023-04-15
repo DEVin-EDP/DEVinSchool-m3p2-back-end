@@ -41,7 +41,6 @@ namespace Domain.Service
                         usuario.UsuarioAtivo,
                         usuario.PerfilId
 
-
                     }
                 };
                 usuario.Senha = "";
