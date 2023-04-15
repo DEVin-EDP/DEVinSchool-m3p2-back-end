@@ -102,7 +102,17 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o retorno dos dados dos cursos." };
             }
         }
-        
+
+        public async Task<ActionResult<dynamic>> GetCursoPesquisa(string valor)
+        {
+            if(_context.Curso == null)
+            {
+                return new { Message = "Não foi possível retornar a informação." };
+            }
+
+            return await _context.Curso.Where(w => w.Nome == valor).ToListAsync();
+        }
+
         public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
         {
             try
@@ -133,7 +143,7 @@ namespace Infrastructure.Service
             }
         }
 
-        public async Task<ActionResult<dynamic>> PostCurso(CursoResponse request)
+        public async Task<ActionResult<dynamic>> PostCurso(CursoPostRequest request)
         {
             if (_context.Curso == null)
             {
@@ -194,7 +204,7 @@ namespace Infrastructure.Service
 
         private static IMapper ConfigurePostMapper()
         {
-            var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<CursoResponse, Curso>());
+            var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<CursoPostRequest, Curso>());
             var mapper = configuracao.CreateMapper();
 
             return mapper;
