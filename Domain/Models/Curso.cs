@@ -1,5 +1,4 @@
-﻿using Domain.Abstract;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models
 {
@@ -23,4 +22,3 @@ namespace Domain.Models
         public CategoriaCurso CategoriaCurso { get; set; }
     }
 }
-

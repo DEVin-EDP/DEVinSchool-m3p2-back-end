@@ -185,6 +185,7 @@ namespace Infrastructure.Service
             }
             return true;
         }
+
         private double DownloadFoto(string foto)
         {
             using (WebClient webClient = new WebClient())
@@ -196,6 +197,7 @@ namespace Infrastructure.Service
                 return TamanhoEmMb;
             }
         }
+
         private static IMapper ConfigurePostMapper()
         {
             var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<UsuarioRequest, Usuario>());
@@ -203,6 +205,7 @@ namespace Infrastructure.Service
 
             return mapper;
         }
+
         private static IMapper ConfigureResponseMapper()
         {
             var configuracao = new MapperConfiguration(cfg => cfg.CreateMap<Usuario, UsuarioResponse>());

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using Domain.DTOs;
 using Domain.Interfaces;
 using Domain.Models;

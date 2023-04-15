@@ -14,7 +14,6 @@ namespace Infrastructure.Service
                 options.UseSqlServer("name=ConnectionStrings:ServerConnection",
                 x => x.MigrationsAssembly("Infrastructure")));
 
-
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ICursoRepository, CursoRepository>();
             services.AddScoped<ICategoriaCursoRepository, CategoriaCursoRepository>();

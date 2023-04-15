@@ -1,6 +1,4 @@
-﻿using Domain.Abstract;
-
-namespace Domain.DTOs
+﻿namespace Domain.DTOs
 {
     public class CursoSalvoResponse
     {

@@ -1,5 +1,4 @@
-﻿using Domain.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Domain.Service
 {
@@ -15,5 +14,4 @@ namespace Domain.Service
             services.AddScoped<ICursoService, CursoService>();
         }
     }
-
 }

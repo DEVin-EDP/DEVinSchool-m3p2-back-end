@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using Domain.DTOs;
-using Domain.Models;
+﻿using Domain.DTOs;
 using Domain.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
