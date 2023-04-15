@@ -72,11 +72,6 @@ namespace Infrastructure.Service
 
         public async Task<ActionResult<dynamic>> PutUsuario(int id, UsuarioPutRequest request)
         {
-            if (id != request.Id)
-            {
-                return new { Message = "O Id do usuário informado é diferente do Id da URL." };
-            }
-
             try
             {
                 Usuario usuario = await _context.Usuario.FindAsync(id);
