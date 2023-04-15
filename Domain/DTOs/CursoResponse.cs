@@ -2,6 +2,7 @@
 {
     public class CursoResponse
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Informacao { get; set; }
         public string Resumo { get; set; }

@@ -28,6 +28,7 @@ namespace Infrastructure.Service
             {
                 List<CursoResponse> curso = await _context.Curso.Select(s => new CursoResponse()
                 {
+                    Id = s.Id,
                     Nome = s.Nome,
                     Resumo = s.Resumo,
                     Informacao = s.Informacao,
