@@ -70,6 +70,7 @@ namespace Infrastructure.Service
             }
         }
 
+        //TODO: GetCursoCategoria(id) deve retornar uma lista de curso da categoria
         public async Task<ActionResult<dynamic>> GetCursoCategoria(int id)
         {
             if (_context.Curso == null)
@@ -96,6 +97,7 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o retorno dos dados dos cursos." };
             }
         }
+        
         public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
         {
             try

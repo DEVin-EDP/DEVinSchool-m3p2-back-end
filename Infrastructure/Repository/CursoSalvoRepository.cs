@@ -78,6 +78,8 @@ namespace Infrastructure.Service
             return cursoSalvo;
         }
 
+        /// TODO: Implementar EndPoint para pegar cursos salvos pelo hr de salvamento.
+
         public async Task<ActionResult<dynamic>> PutCursoSalvo(int id, CursoSalvoPutRequest request)
         {
             if(request == null)

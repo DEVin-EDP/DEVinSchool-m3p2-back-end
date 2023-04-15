@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿//TODO: Adicionar UsuarioResponse.
+//TODO: incluir perfil para retorno de usuario somente no getall
+
+using System.Net;
 using AutoMapper;
 using Domain.DTOs;
 using Domain.Interfaces;

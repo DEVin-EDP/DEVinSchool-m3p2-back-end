@@ -18,7 +18,7 @@ namespace DevInFinalApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = ("usuario, admin"))]
+        [Authorize(Roles = ("admin"))]
         public async Task<ActionResult<dynamic>> GetUsuario()
         {
             return await _usuarioService.GetUsuario();

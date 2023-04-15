@@ -19,7 +19,7 @@ namespace DevInFinalApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = ("usuario,admin"))]
+        [Authorize(Roles = ("usuario, admin"))]
         public async Task<ActionResult<dynamic>> GetCurso()
         {
             return await _CursoService.GetCurso();
