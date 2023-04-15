@@ -6,7 +6,7 @@ namespace Domain.Interfaces
 {
     public interface ICategoriaCursoRepository
     {
-    //    Task<CategoriaCurso> GetUsuarioByDto(CategoriaCurso dto);
+      
         Task<ActionResult<dynamic>> GetCategoriaCurso();
         Task<ActionResult<dynamic>> GetCategoriaCurso(int id);
         Task<ActionResult<dynamic>> PutCategoriaCurso(int id, CategoriaCursoRequestDto categoriaCurso);

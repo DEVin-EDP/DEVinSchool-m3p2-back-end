@@ -9,7 +9,7 @@ namespace DevInFinalApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CursoController : ControllerBase
     {
         private readonly ICursoService _CursoService;
@@ -19,42 +19,42 @@ namespace DevInFinalApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = ("usuario"))]
+        [Authorize(Roles = ("usuario,admin"))]
         public async Task<ActionResult<dynamic>> GetCurso()
         {
             return await _CursoService.GetCurso();
         }
 
         [HttpGet("{id}")]
-        //[Authorize(Roles = ("usuario"))]
+        [Authorize(Roles = ("usuario, admin"))]
         public async Task<ActionResult<dynamic>> GetCurso(int id)
         {
             return await _CursoService.GetCurso(id);
         }
 
         [HttpGet("categoria/{id}")]
-        //[Authorize(Roles = ("usuario"))]
+        [Authorize(Roles = ("usuario, admin"))]
         public async Task<ActionResult<dynamic>> GetCursoCategoria(int id)
         {
             return await _CursoService.GetCursoCategoria(id);
         }
 
         [HttpPost]
-        //[Authorize(Roles = ("admin"))]
+        [Authorize(Roles = ("admin"))]
         public async Task<ActionResult<dynamic>> PostCurso(CursoResponse request)
         {
             return await _CursoService.PostCurso(request);
         }
 
         [HttpPut("{id}")]
-        //[Authorize(Roles = ("admin"))]
+        [Authorize(Roles = ("admin"))]
         public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
         {
             return await _CursoService.PutCurso(id, request);
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = ("admin"))]
+        [Authorize(Roles = ("admin"))]
         public async Task<ActionResult<dynamic>> DeleteCurso(int id)
         {
             return await _CursoService.DeleteCurso(id);
