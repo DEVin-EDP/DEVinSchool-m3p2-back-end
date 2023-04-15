@@ -22,7 +22,7 @@ Domain.Service.DependencyResolverService.Register(builder.Services);
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rh API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevInSchool API", Version = "v1" });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
