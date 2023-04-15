@@ -40,7 +40,7 @@ namespace DevInFinalApi.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = ("usuario,admin"))]
-        public async Task<ActionResult<dynamic>> PutCursoSalvo(int id, CursoSalvoPutRequest request)
+        public async Task<ActionResult<dynamic>> PutCursoSalvo(int id,[FromForm]CursoSalvoPutRequest request)
         {
             return await _cursoSalvoService.PutCursoSalvo(id, request);
         }
