@@ -1,6 +1,6 @@
 ﻿namespace DevInFinalApi.Test
 {
-    internal class AutenticacaoControllerTeste
+    public class AutenticacaoControllerTeste
     {
         [SetUp]
         public void Setup()

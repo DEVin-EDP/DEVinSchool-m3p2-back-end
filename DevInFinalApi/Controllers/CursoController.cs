@@ -30,6 +30,13 @@ namespace DevInFinalApi.Controllers
             return await _CursoService.GetCurso(id);
         }
 
+        [HttpGet("pesquisa")]
+        [Authorize(Roles = ("usuario, admin"))]
+        public async Task<ActionResult<dynamic>> GetCursoPesquisa(string valor)
+        {
+            return await _CursoService.GetCursoPesquisa(valor);
+        }
+
         [HttpGet("categoria")]
         [Authorize(Roles = ("usuario, admin"))]
         public async Task<ActionResult<dynamic>> GetCursoCategoria(int id)
@@ -39,14 +46,14 @@ namespace DevInFinalApi.Controllers
 
         [HttpPost]
         [Authorize(Roles = ("admin"))]
-        public async Task<ActionResult<dynamic>> PostCurso(CursoResponse request)
+        public async Task<ActionResult<dynamic>> PostCurso(CursoPostRequest request)
         {
             return await _CursoService.PostCurso(request);
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = ("admin"))]
-        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
+        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoPostRequest request)
         {
             return await _CursoService.PutCurso(id, request);
         }

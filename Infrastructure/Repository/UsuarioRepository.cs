@@ -3,6 +3,7 @@ using AutoMapper;
 using Domain.DTOs;
 using Domain.Interfaces;
 using Domain.Models;
+using Domain.Service;
 using Infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -72,11 +73,6 @@ namespace Infrastructure.Service
 
         public async Task<ActionResult<dynamic>> PutUsuario(int id, UsuarioPutRequest request)
         {
-            if (id != request.Id)
-            {
-                return new { Message = "O Id do usuário informado é diferente do Id da URL." };
-            }
-
             try
             {
                 Usuario usuario = await _context.Usuario.FindAsync(id);
@@ -166,6 +162,33 @@ namespace Infrastructure.Service
                 return new { Message = "Ocorreu erro durante o processo a exclusão do usuário." };
             }
         }
+
+        public async Task<ActionResult<dynamic>> RecuperaUsuario(string email)
+        {
+            if (_context.Usuario == null)
+            {
+                return new { Message = "Não foi possível retornar a informação." };
+            }
+
+            try
+            {
+                // Find the user containing the provided email
+                var usuario = await _context.Usuario.FirstOrDefaultAsync(u => u.Email.Contains(email));
+
+                if (usuario == null)
+                {
+                    return new { Message = "Não foi possível retornar a informação." };
+                }
+
+                EnviaEmailService.EnviaEmail(usuario.Email, "Recuperação de senha", usuario.Senha);
+
+                return new { Message = "Senha enviada para o email cadastrado!" };
+            }
+            catch
+            {
+                return new { Message = "Ocorreu erro durante o retorno dos dados dos usuários." };
+            }
+        }
         private bool ExisteUsuario(int id)
         {
             return _context.Usuario.Any(a => a.Id == id);
@@ -213,5 +236,7 @@ namespace Infrastructure.Service
 
             return mapper;
         }
+
+        
     }
 }

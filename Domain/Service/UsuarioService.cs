@@ -37,5 +37,10 @@ namespace Domain.Service
         {
             return await _usuarioRepository.DeleteUsuario(id);
         }
+
+        public async Task<ActionResult<dynamic>> RecuperaUsuario(string email)
+        {
+            return await _usuarioRepository.RecuperaUsuario(email);
+        }
     }
 }

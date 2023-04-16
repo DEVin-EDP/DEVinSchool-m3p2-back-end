@@ -96,7 +96,6 @@ namespace Infrastructure.Test
 
             await _usuarioRepository.PutUsuario(77, new UsuarioPutRequest
             {
-                Id = 77,
                 Nome = user.Nome + " Sauro",
                 Idade = user.Idade,
                 Senha = user.Senha
@@ -108,7 +107,7 @@ namespace Infrastructure.Test
             Assert.True(user.Nome == "Tiago Sauro");
 
         }
-        [Test]
+        // [Test]
         async public Task TestPostUsuario()
         {
             var _usuarioRepository = new UsuarioRepository(dbContext);

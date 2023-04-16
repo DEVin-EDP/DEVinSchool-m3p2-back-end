@@ -1,6 +1,6 @@
 ﻿namespace DomainUnit.Test
 {
-    internal class TokenServiceTeste
+    public class TokenServiceTeste
     {
         [SetUp]
         public void Setup()

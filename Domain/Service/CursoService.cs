@@ -27,12 +27,17 @@ namespace Domain.Service
             return await _cursoRepository.GetCursoCategoria(id);
         }
 
-        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
+        public async Task<ActionResult<dynamic>> GetCursoPesquisa(string valor)
+        {
+            return await _cursoRepository.GetCursoPesquisa(valor);
+        }
+
+        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoPostRequest request)
         {
             return await _cursoRepository.PutCurso(id, request);
         }
 
-        public async Task<ActionResult<dynamic>> PostCurso(CursoResponse request)
+        public async Task<ActionResult<dynamic>> PostCurso(CursoPostRequest request)
         {
             return await _cursoRepository.PostCurso(request);
         }
