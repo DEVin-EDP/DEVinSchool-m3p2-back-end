@@ -32,6 +32,7 @@ namespace Infrastructure.Service
                       {
                           Id = s.Id,
                           UsuarioId = s.UsuarioId,
+                          CursoId = c.Id,
                           DataCursoSalvo = s.DataCursoSalvo,
                           StatusCurso = s.StatusCurso.ToString(),
                           Link = s.Curso.Link,
@@ -146,6 +147,10 @@ namespace Infrastructure.Service
             {
                 return new { Message = "O Id do curso ou usuário salvo é diferente do Id da URL." };
             }
+            if(ExisteCursoSalvoRegistrada(request.CursoId))
+            {
+                return new { Message = "O Id do curso ou usuário salvo é diferente do Id da URL." };
+            }
 
             try
             {
@@ -215,6 +220,10 @@ namespace Infrastructure.Service
         private bool ExisteUsuario(int id)
         {
             return _context.Usuario.Any(a => a.Id == id);
+        }
+        private bool ExisteCursoSalvoRegistrada(int id)
+        {
+            return _context.CursoSalvo.Any(a => a.CursoId == id);
         }
 
         private bool ExisteCurso(int id)
