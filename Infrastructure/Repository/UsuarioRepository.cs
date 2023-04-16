@@ -99,7 +99,7 @@ namespace Infrastructure.Service
 
         public async Task<ActionResult<dynamic>> PostUsuario(UsuarioRequest request)
         {
-            if (_context.Usuario == null)
+            if (_context.Usuario == null || _context.Perfil == null)
             {
                 return new { Message = "Não foi possível retornar a informação." };
             }
@@ -120,6 +120,9 @@ namespace Infrastructure.Service
             {
                 IMapper mapper = ConfigurePostMapper();
                 Usuario usuario = mapper.Map<Usuario>(request);
+
+                usuario.PerfilId = 1;
+                usuario.Perfil = await _context.Perfil.FindAsync(usuario.PerfilId);
 
                 _context.Usuario.Add(usuario);
                 await _context.SaveChangesAsync();
