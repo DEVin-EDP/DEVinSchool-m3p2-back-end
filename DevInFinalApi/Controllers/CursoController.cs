@@ -53,7 +53,7 @@ namespace DevInFinalApi.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = ("admin"))]
-        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
+        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoPostRequest request)
         {
             return await _CursoService.PutCurso(id, request);
         }
