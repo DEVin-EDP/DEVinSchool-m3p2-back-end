@@ -116,7 +116,7 @@ namespace Infrastructure.Migrations
                             CategoriaCursoId = 1,
                             CursoAtivo = true,
                             Informacao = "Curso de Java para iniciantes",
-                            Link = "java.com",
+                            Link = "https://w7.pngwing.com/pngs/961/251/png-transparent-java-runtime-environment-programming-language-programmer-computer-programming-java-text-logo-software-developer.png",
                             Nome = "Curso de Java",
                             Resumo = "Introdução ao Java"
                         },
@@ -127,7 +127,7 @@ namespace Infrastructure.Migrations
                             CategoriaCursoId = 2,
                             CursoAtivo = true,
                             Informacao = "Administração de Empresas para iniciantes",
-                            Link = "admdeempresas.com",
+                            Link = "https://i.pinimg.com/originals/8a/1a/5c/8a1a5c0186881d4a51783bd72b764f9f.png",
                             Nome = "Adm de Empresas",
                             Resumo = "Introdução a Administração de Empresas"
                         },
@@ -138,7 +138,7 @@ namespace Infrastructure.Migrations
                             CategoriaCursoId = 3,
                             CursoAtivo = true,
                             Informacao = "Introdução a marketing utilizando redes sociais",
-                            Link = "marketingrs.com",
+                            Link = "https://w7.pngwing.com/pngs/702/844/png-transparent-social-media-marketing-digital-marketing-digital-media-social-media-text-service-social-media-marketing.png",
                             Nome = "Marketing de Redes Sociais",
                             Resumo = "aprenda utilizar redes sociais para alavancar o seu negócio"
                         },
@@ -149,9 +149,75 @@ namespace Infrastructure.Migrations
                             CategoriaCursoId = 4,
                             CursoAtivo = true,
                             Informacao = "Técnicas de Designer gráfico.",
-                            Link = "designergrafico.com",
+                            Link = "https://e7.pngegg.com/pngimages/850/473/png-clipart-logo-graphic-design-graphics-product-design-logo-graphic-design.png",
                             Nome = "Introdução ao Design Gráfico",
                             Resumo = "Aprenda técnicas essenciais para ser um Designer gráfico."
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CargaHoraria = 100,
+                            CategoriaCursoId = 1,
+                            CursoAtivo = true,
+                            Informacao = "Técnicas de Banco de Dados.",
+                            Link = "https://w7.pngwing.com/pngs/108/671/png-transparent-database-administrator-computer-icons-others-orange-logo-data.png",
+                            Nome = "Tecnologia em Banco de Dados",
+                            Resumo = "Aprenda aprenderá como trabalhar com grande quantidade de informações e dados que entram no banco de dados de uma empresa, como por exemplo, salários, lista de clientes e fornecedores, relatórios, dentre outros. É uma atividade muito minuciosa, na qual o profissional a desenvolverá sendo incumbido de organizar tais dados, de modo a deixá-los sempre atualizados, realizando a manutenção dos mesmos."
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CargaHoraria = 60,
+                            CategoriaCursoId = 1,
+                            CursoAtivo = true,
+                            Informacao = "Rede de Computadores para iniciantes",
+                            Link = "https://e7.pngegg.com/pngimages/863/566/png-clipart-computer-network-computer-icons-local-area-network-information-technology-internet-computer-computer-network-computer.png",
+                            Nome = "Tecnologia em rede de Computadores",
+                            Resumo = "O estudante aprenderá como disponibilizar várias redes e gerenciar todas elas para a empresa, como intranet, bluetooth, WI-FI, internet e LAN, além de sistemas de seguranças para não haver prejuízos."
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CargaHoraria = 900,
+                            CategoriaCursoId = 1,
+                            CursoAtivo = true,
+                            Informacao = "Faculdade contendo tudo que engloba sistema de informação.",
+                            Link = "https://w7.pngwing.com/pngs/435/773/png-transparent-information-system-sao-paulo-state-technological-college-technology-technology.png",
+                            Nome = "Sistema de Informação",
+                            Resumo = "curso em que se aprende a trabalhar com redes de computadores podendo administrar, criar, garantir a segurança das redes, instalar e configurar sistemas de softwares, dentre outros aprendizados."
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CargaHoraria = 124,
+                            CategoriaCursoId = 2,
+                            CursoAtivo = true,
+                            Informacao = "As atividades que este profissional realiza em seu cotidiano dependem do setor da economia.",
+                            Link = "https://w7.pngwing.com/pngs/335/1019/png-transparent-logistics-international-trade-export-transport-others-freight-transport-service-cargo.png",
+                            Nome = "Administração de Comércio exterior.",
+                            Resumo = "O profissional que atua na área de Comércio Exterior é o responsável por realizar a compra e venda de produtos e serviços entre instituições de diferentes países. É por isso que ele sempre precisa estar atento ao que acontece no mundo todo, principalmente nos assuntos econômicos, sociais e políticos do país em que se está negociando."
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CargaHoraria = 120,
+                            CategoriaCursoId = 3,
+                            CursoAtivo = true,
+                            Informacao = "Quando falamos de profissionais de nível avançado, estamos nos referindo a especialistas.",
+                            Link = "https://w7.pngwing.com/pngs/48/230/png-transparent-digital-marketing-mass-media-marketing-text-computer-logo.png",
+                            Nome = "Master em Marketing e Comunicação Digital",
+                            Resumo = "tem como principal objetivo oferecer conhecimentos e habilidades para que o profissional esteja capacitado a utilizar a internet em processos de vendas empresariais, com o intuito de aumentar a competitividade da organização no mercado de trabalho."
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CargaHoraria = 60,
+                            CategoriaCursoId = 4,
+                            CursoAtivo = true,
+                            Informacao = "Habilitado para criar, projetar e realizar a execução de jogos eletrônicos para diversos aparelhos, como smartphones, tablets ou computadores.",
+                            Link = "https://w7.pngwing.com/pngs/50/329/png-transparent-video-game-development-computer-icons-video-game-developer-design.png",
+                            Nome = "Design de Games",
+                            Resumo = "O profissional da área de Design de Games precisa compreender o público-alvo e as tendências do mercado que ele está inserido. Dentro do processo de produção, o Designer de Games tomará decisões com o objetivo de tornar o seu produto atraente e operante."
                         });
                 });
 
@@ -279,7 +345,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(4948),
+                            DataCadastro = new DateTime(2023, 4, 16, 18, 18, 26, 643, DateTimeKind.Local).AddTicks(467),
                             Email = "teste@gmail.com",
                             Foto = "https://i.pinimg.com/236x/37/01/e7/3701e763f6ded4234b68d8fac1a9fa85.jpg",
                             Idade = 30,
@@ -292,7 +358,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 2,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5605),
+                            DataCadastro = new DateTime(2023, 4, 16, 18, 18, 26, 643, DateTimeKind.Local).AddTicks(860),
                             Email = "tiago@gmail.com",
                             Foto = "https://i.pinimg.com/236x/05/0b/72/050b721378546e519bd6e33c4ccf9630.jpg",
                             Idade = 22,
@@ -305,7 +371,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 3,
                             CPF = "11122233308",
-                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5607),
+                            DataCadastro = new DateTime(2023, 4, 16, 18, 18, 26, 643, DateTimeKind.Local).AddTicks(863),
                             Email = "josé@gmail.com",
                             Foto = "https://pbs.twimg.com/profile_images/1268204267749494788/az__pHAX_400x400.jpg",
                             Idade = 55,
@@ -318,7 +384,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 5,
                             CPF = "12345278412",
-                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5609),
+                            DataCadastro = new DateTime(2023, 4, 16, 18, 18, 26, 643, DateTimeKind.Local).AddTicks(865),
                             Email = "ana@mail.com",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 32,
@@ -331,7 +397,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 6,
                             CPF = "78945612345",
-                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5611),
+                            DataCadastro = new DateTime(2023, 4, 16, 18, 18, 26, 643, DateTimeKind.Local).AddTicks(867),
                             Email = "callas@mail.com",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 30,
@@ -344,7 +410,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 7,
                             CPF = "23456242189",
-                            DataCadastro = new DateTime(2023, 4, 12, 20, 24, 4, 672, DateTimeKind.Local).AddTicks(5617),
+                            DataCadastro = new DateTime(2023, 4, 16, 18, 18, 26, 643, DateTimeKind.Local).AddTicks(872),
                             Email = "rita@mail.com\"",
                             Foto = "https://example.com/myphoto.jpg",
                             Idade = 82,
