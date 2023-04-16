@@ -87,6 +87,11 @@ namespace Infrastructure.Service
         {
             try
             {
+                if (ExisteCategoriaRegistrada(request))
+                {
+                    return new { Mensage = "Categoria ja registrado." };
+                }
+
                 IMapper mapper = ConfigurePostMapper();
                 CategoriaCurso categoriacurso = mapper.Map<CategoriaCurso>(request);
 
@@ -135,6 +140,11 @@ namespace Infrastructure.Service
         private bool ExisteCategoriaCurso(int id)
         {
             return _context.CategoriaCurso.Any(a => a.Id == id);
+        }
+
+        private bool ExisteCategoriaRegistrada(CategoriaCursoRequestDto request)
+        {
+            return _context.CategoriaCurso.Any(a => a.Titulo == request.Titulo);
         }
 
         private static IMapper ConfigurePostMapper()

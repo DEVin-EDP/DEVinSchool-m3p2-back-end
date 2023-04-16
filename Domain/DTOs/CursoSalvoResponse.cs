@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int UsuarioId { get; set; }
+        public int CursoId { get; set; }
         public string StatusCurso { get; set; }
         public DateTime DataCursoSalvo { get; set; }
         public string Nome { get; set; }
