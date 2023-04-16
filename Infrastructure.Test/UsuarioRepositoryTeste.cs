@@ -107,7 +107,7 @@ namespace Infrastructure.Test
             Assert.True(user.Nome == "Tiago Sauro");
 
         }
-        // [Test]
+        [Test]
         async public Task TestPostUsuario()
         {
             var _usuarioRepository = new UsuarioRepository(dbContext);
