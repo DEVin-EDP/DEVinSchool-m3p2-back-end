@@ -6,6 +6,7 @@ using Moq;
 
 namespace DomainUnit.Test
 {
+    [TestFixture]
     public class AutenticacaoServiceTeste
     {
         private Mock<IUsuarioRepository> _usuarioRepositoryMock;
