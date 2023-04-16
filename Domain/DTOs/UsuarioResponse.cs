@@ -8,5 +8,6 @@
         public string Email { get; set; }
         public string Senha { get; set; }
         public string Foto { get; set; }
+        public int PerfilId { get; set; }
     }
 }
