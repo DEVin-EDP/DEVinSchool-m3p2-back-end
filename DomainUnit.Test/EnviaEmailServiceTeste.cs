@@ -1,16 +1,29 @@
-﻿namespace DomainUnit.Test
+﻿using Domain.Service;
+using Moq;
+using System.Net.Mail;
+
+namespace DomainUnit.Test
 {
     public class EnviaEmailServiceTeste
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
-        public void Test1()
+        public void EnviaEmail_DeveEnviarEmailComSucesso()
         {
-            Assert.Pass();
+            // Arrange
+            var toAddress = "test@test.com";
+            var subject = "Test Subject";
+            var body = "Test Body";
+
+            var mockSmtpClient = new Mock<SmtpClient>();
+            mockSmtpClient
+                .Setup(x => x.Send(It.IsAny<MailMessage>()))
+                .Verifiable();
+
+            // Act
+            EnviaEmailService.EnviaEmail(toAddress, subject, body);
+
+            // Assert
+            mockSmtpClient.Verify(x => x.Send(It.IsAny<MailMessage>()), Times.Once);
         }
     }
 }
