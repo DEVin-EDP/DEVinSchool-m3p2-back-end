@@ -110,10 +110,10 @@ namespace Infrastructure.Service
                 return new { Message = "Não foi possível retornar a informação." };
             }
 
-            return await _context.Curso.Where(w => w.Nome == valor).ToListAsync();
+            return await _context.Curso.Where(w => w.Nome.Contains(valor)).ToListAsync();
         }
 
-        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoResponse request)
+        public async Task<ActionResult<dynamic>> PutCurso(int id, CursoPostRequest request)
         {
             try
             {
