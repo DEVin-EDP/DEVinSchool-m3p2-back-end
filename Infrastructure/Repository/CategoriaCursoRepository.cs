@@ -89,7 +89,7 @@ namespace Infrastructure.Service
             {
                 if (ExisteCategoriaRegistrada(request))
                 {
-                    return new { Mensage = "Categoria ja registrado." };
+                    return new { Message = "Categoria ja registrada." };
                 }
 
                 IMapper mapper = ConfigurePostMapper();
