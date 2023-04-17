@@ -21,21 +21,21 @@ namespace DevInFinalApi.Test
         [Test]
         public async Task Test_AutenticarUsuario_Returns_Token()
         {
-            // Arrange
             var mockService = new Mock<IAutenticacaoService>();
             var expectedToken = "test_token";
+
             mockService.Setup(s => s.AutenticarUsuario(It.IsAny<LoginDTO>())).ReturnsAsync(expectedToken);
+            
             var controller = new AutenticacaoController(mockService.Object);
             var dto = new LoginDTO { Email = "test@test.com", Senha = "password" };
-
-            // Act
             var result = await controller.AuthenticateAsync(dto);
-
-            // Assert
             var okResult = result.Result as OkObjectResult;
+            
             Assert.IsNotNull(okResult);
             Assert.IsTrue(okResult.Value is string);
+            
             var returnValue = okResult.Value as string;
+            
             Assert.AreEqual(expectedToken, returnValue);
         }
     }

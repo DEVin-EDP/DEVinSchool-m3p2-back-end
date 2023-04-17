@@ -2,10 +2,7 @@ using Domain.DTOs;
 using Domain.Interfaces;
 using Domain.Models;
 using Domain.Service;
-using Infrastructure.Repository;
-using Infrastructure.Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 
 namespace Infrastructure.Test
@@ -21,7 +18,6 @@ namespace Infrastructure.Test
             _categoriaCursoRepositoryMock = new Mock<ICategoriaCursoRepository>();
             _categoriaCursoService = new CategoriaCursoService(_categoriaCursoRepositoryMock.Object);
         }
-
 
         [Test]
         public async Task GetCategoriaCurso_ReturnsCorrectObject()
@@ -126,7 +122,6 @@ namespace Infrastructure.Test
 
             Assert.AreEqual(categoriaCurso, result.Value);
         }
-
 
         [Test]
         public async Task DeleteCategoriaCurso_ReturnsError()

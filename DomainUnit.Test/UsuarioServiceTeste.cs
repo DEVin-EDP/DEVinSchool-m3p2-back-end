@@ -58,7 +58,6 @@ namespace DomainUnit.Test
         [Test]
         public async Task TestPutUsuario()
         {
-            // Arrange
             int id = 1;
             UsuarioPutRequest request = new UsuarioPutRequest
             {
@@ -72,7 +71,6 @@ namespace DomainUnit.Test
                 .ReturnsAsync(new Usuario { Nome = request.Nome, Idade = request.Idade });
 
             var service = new UsuarioService(mockRepository.Object);
-
             var result = await service.PutUsuario(id, request);
 
 
@@ -81,7 +79,6 @@ namespace DomainUnit.Test
             Assert.IsInstanceOf<Usuario>(okResult);
             Assert.AreEqual(request.Nome, okResult.Nome);
             Assert.AreEqual(request.Idade, okResult.Idade);
-
             mockRepository.Verify(x => x.PutUsuario(id, request), Times.Once);
         }
 
@@ -111,9 +108,10 @@ namespace DomainUnit.Test
             var service = new UsuarioService(mockRepository.Object);
             var result = await service.PostUsuario(request);
 
-
             Assert.IsInstanceOf<ActionResult<dynamic>>(result);
+
             var okResult = result.Value as Usuario;
+
             Assert.IsInstanceOf<Usuario>(okResult);
             Assert.AreEqual(request.Nome, okResult.Nome);
             Assert.AreEqual(request.Idade, okResult.Idade);
@@ -136,23 +134,5 @@ namespace DomainUnit.Test
 
              mockRepository.Verify(x => x.DeleteUsuario(id), Times.Once);
         }
-        // [Test]
-        // public async Task TestRecuperaUsuario()
-        // {
-        //     string email = "helio@mail.com";
-        //     var mockRepository = new Mock<IUsuarioRepository>(email);
-        //     mockRepository.Setup(x => x.RecuperaUsuario(email))
-        //        .ReturnsAsync(true);
-            
-        //     var service = new UsuarioService(mockRepository.Object);
-        //     var result = await service.RecuperaUsuario(email);
-
-        //     Assert.IsInstanceOf<ActionResult<dynamic>>(result);
-
-        //     Assert.IsNotNull(result);
-        //     Assert.IsTrue(result.Value);
-
-        //      mockRepository.Verify(x => x.RecuperaUsuario(email), Times.Once);
-        // }
     }
 }
